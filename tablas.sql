@@ -7,23 +7,6 @@ CREATE TABLE `USUARIOS` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 insert into USUARIOS values(1730042,"Rebeca");
 
-CREATE TABLE `EQUIPOS` (
-  `id_equipo` int(11) NOT NULL,
-  `num_integrantes` int NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `INVENTARIO_MISIONES_MISIONES_id` int(11) NOT NULL,
-  `INVENTARIO_ITEMS_ITEMS_id_producto` int(11) NOT NULL,
-  PRIMARY KEY (`id_equipo`,`INVENTARIO_MISIONES_MISIONES_id`,`INVENTARIO_ITEMS_ITEMS_id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `HECHIZOS` (
-  `idhechizos` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `categoria` varchar(50) NOT NULL,
-  `valor` int(100) NOT NULL,
-  PRIMARY KEY (`idhechizos`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
-
 CREATE TABLE `INVENTARIO_ITEMS` (
   idinventario int(11) NOT NULL auto_increment,
   idjugadores int,
@@ -74,14 +57,22 @@ CREATE TABLE `MISIONES` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+create table ASISTENCIA(
+idasistencia int auto_increment,
+idjugadores int,
+total int,
+primary key(idasistencia,idjugadores),
+foreign key (idjugadores) references JUGADORES (idjugadores)
+);
+
 
 
 -- stored procedure
  DELIMITER //
  CREATE PROCEDURE Clon_de_sombras(_ID INT(25))
    BEGIN
-   UPDATE Usuario SET ASISTENCIA=ASISTENCIA+1 WHERE IDUSUARIO=_ID;
-   UPDATE Usuario SET PUNTAJE=PUNTAJE-7  WHERE IDUSUARIO=_ID;
+   UPDATE ASISTENCIA SET total=total+1 WHERE idasistencia=_ID;
+   UPDATE JUGADORES SET vida=vida-7  WHERE idasistencia=_ID;
    END //
  DELIMITER ;
 
@@ -95,44 +86,44 @@ DELIMITER ;
  DELIMITER //
  CREATE PROCEDURE MuertePrematura(_MATRICULA int(20))
    BEGIN
-   UPDATE Usuario SET PUNTAJE=PUNTAJE-15 WHERE MATRICULA=_MATRICULA;    
+   UPDATE JUGADORES SET vida=vida-15 WHERE matricula=_MATRICULA;    
    END //
  DELIMITER ;
 
  DELIMITER $$
 CREATE PROCEDURE Lagrimas_de_amigos(_NUMERO_DE_EQUIPO INT(25))
 BEGIN
-   UPDATE Usuario SET PUNTAJE=PUNTAJE-60 WHERE NUMERO_DE_EQUIPO=_NUMERO_DE_EQUIPO; 
+   UPDATE JUGADORES SET vida=vida-60 WHERE equipo=_NUMERO_DE_EQUIPO; 
    END$$
 DELIMITER ;
 
  DELIMITER $$
 CREATE PROCEDURE Reloj_de_arena(_ID INT(25))
 BEGIN
-   UPDATE Hechizos SET DURACION=DURACION+1  WHERE IDUSUARIO=_ID; 
-   UPDATE Usuario SET PUNTAJE=PUNTAJE-5  WHERE IDUSUARIO=_ID;
+   UPDATE MISIONES SET fecha=fecha+1  WHERE idjugadores=_ID; 
+   UPDATE JUGADORES SET vida=vida-5  WHERE idjugadores=_ID;
    END$$
 DELIMITER ;
  DELIMITER $$
 CREATE PROCEDURE teletransportacion_mayor(_ID INT(25),_NUMERO_DE_EQUIPO INT(20))
 BEGIN     
-	 UPDATE Usuario SET IDUSUARIO=_ID WHERE NUMERO_DE_EQUIPO=_NUMERO_DE_EQUIPO;
-     UPDATE Usuario SET PUNTAJE=PUNTAJE-40  WHERE IDUSUARIO=_ID;
+	 UPDATE JUGADORES SET idjugadores=_ID WHERE equipo=_NUMERO_DE_EQUIPO;
+     UPDATE JUGADORES SET vida=vida-40  WHERE idjugadores=_ID;
    END$$
 DELIMITER ;
  DELIMITER $$
 CREATE PROCEDURE teletransportacion_menor(_ID INT(25),_ID1 INT(25))
 BEGIN
-    UPDATE Hechizos SET IDUSUARIO=_ID1 WHERE IDUSUARIO=_ID;
-   UPDATE Usuario SET PUNTAJE=PUNTAJE-7  WHERE IDUSUARIO=_ID;
+    UPDATE MISIONES SET idjugadores=_ID1 WHERE idjugadores=_ID;
+   UPDATE JUGADORES SET vida=vida-7  WHERE idjugadores=_ID;
    END$$
 DELIMITER ;
 
  DELIMITER $$
 CREATE PROCEDURE tortura_simple(_ID INT(25))
 BEGIN
- UPDATE Hechizos set IDUSUARIO = CAST(RAND() * 9 AS UNSIGNED) where IDUSUARIO=_ID;
- UPDATE Usuario SET PUNTAJE=PUNTAJE-5  WHERE IDUSUARIO=_ID;
+ UPDATE MISIONES set idjugadores = CAST(RAND() * 9 AS UNSIGNED) where idjugadores=_ID;
+ UPDATE JUGADORES SET vida=vida-5  WHERE idjugadores=_ID;
    END$$
 DELIMITER ;
 

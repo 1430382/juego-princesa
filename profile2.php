@@ -27,6 +27,21 @@ $usuario = $_SESSION['nombre'];
   <title>Perfil</title>
   <!--Estilos usando css para la imagen de fondo y el color del placeholder del usuario y contraseña-->
   <style>
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .button1 {background-color: #e7e7e7; color: white;} /* Gray */
+  </style>
+  <style>
     input::-webkit-input-placeholder {
       color: white !important;
     }
@@ -148,7 +163,6 @@ $usuario = $_SESSION['nombre'];
 
                 }
                 }
-
       ?>
       </tbody>
     </table>
@@ -161,25 +175,25 @@ $usuario = $_SESSION['nombre'];
     </script>
 
         </h2>
-        <style>
-        .button {
-          background-color: #4CAF50; /* Green */
-          border: none;
-          color: white;
-          padding: 10px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          cursor: pointer;
-        }
-        .button1 {background-color: #e7e7e7; color: white;} /* Gray */
-        </style>
+          <form class="" method="post" style= "float:left;margin-left:100px;margin-top:200px;">
+            <select name="users" id="users">
+          <?php
+            $res="select iditems,CONCAT(' Item o maldición: ', nombre,' costo: ',precio,' ') as ITEMS FROM ITEMS;";
+            $res=$con->query($res);
+            while ($row = $res->fetch_array()) {
+              ?>
+              <option value="<?php echo $row['iditems'];?>">
+              <?php echo $row['ITEMS'];?>
+              </option>
+              <?php
+            }
+          ?>
 
+  </select>
 
         <!--Barra de selección -->
-          <button class="button button1" style= "float:left;margin-left:100px;margin-top:400px;" type="submit" name="registrar" >Registrar jugador</button>
+          <button class="button button1" style= "float:left;margin-left:-10px;margin-top:10px;" type="submit" name="registrar" >usar</button>
+          </form>
         <!--Señal -->
         <div class="col-lg-12 text-center"style="margin: 0;padding: 0;position: relative;">
 

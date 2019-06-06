@@ -44,7 +44,7 @@ if(isset($_POST['registrar'])){
 		<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
 		<strong>Exitoso!</strong> La tarea se ha guardado correctamente.
 	</div>";
-		
+
 	}else{
 		echo "<div class='alert alert-danger alert-dismissable'>
 		<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
@@ -415,7 +415,7 @@ $con->close();
 					 			}
 					 		?>
 
-			</select>	
+			</select>
 								<button class="button button1" type="submit" name="registrarH" >Registrar hechizo</button>
 								<button class="button button1" type="submit" name="eliminarH" >Eliminar hechizo</button>
 							</form>
