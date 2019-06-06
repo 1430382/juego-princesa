@@ -1,0 +1,409 @@
+#player1{
+	position: relative;
+	width: 90%;
+	right: 20%;
+}
+
+#player2{
+	position: relative;
+	width: 90%;
+	right: 30%;
+	top: 5%;
+}
+
+#player3{
+	position: relative;
+	width: 90%;
+	right: 39%;
+	top: 5%;
+}
+
+#jugador1Eq1{
+	position: relative;
+	width: 40%;
+	bottom: 500%;
+	right: 50%;
+}
+
+#vida1eq1{
+	position: relative;
+	width: 80%;
+	bottom: 480%;
+	right: 52%;
+}
+
+#int1eq1{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 554%;
+	right: 50%;
+}
+
+#jugador2Eq1{
+	position: relative;
+	width: 40%;
+	bottom: 520%;
+	right: 50%;
+}
+
+#vida2eq1{
+	position: relative;
+	width: 80%;
+	bottom: 500%;
+	right: 52%;
+}
+
+#int2eq1{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 576%;
+	right: 50%;
+}
+
+#jugador3Eq1{
+	position: relative;
+	width: 40%;
+	bottom: 540%;
+	right: 50%;
+}
+
+#vida3eq1{
+	position: relative;
+	width: 80%;
+	bottom: 525%;
+	right: 52%;
+}
+
+#int3eq1{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 598%;
+	right: 50%;
+}
+
+#jugador4Eq1{
+	position: relative;
+	width: 40%;
+	bottom: 562%;
+	right: 50%;
+}
+
+#vida4eq1{
+	position: relative;
+	width: 80%;
+	bottom: 545%;
+	right: 52%;
+}
+
+#int4eq1{
+	position: relative;
+	font-family: 'VT323', serif;
+	bottom: 620%;
+	right: 50%;
+	color: white;
+}
+
+#btn1eq1{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 12%;
+}
+
+#btn2eq1{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 8%;
+}
+
+#btn3eq1{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 4.5%;
+}
+
+#btn4eq1{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 1%;
+}
+
+#btn5eq1{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	left: 3%;
+}
+
+/*Equipo 2*/
+
+#jugador1Eq2{
+	position: relative;
+	width: 40%;
+	bottom: 500%;
+	right: 85%;
+}
+
+#vida1eq2{
+	position: relative;
+	width: 80%;
+	bottom: 480%;
+	right: 67%;
+}
+
+#int1eq2{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 554%;
+	right: 65%;
+}
+
+#jugador2Eq2{
+	position: relative;
+	width: 40%;
+	bottom: 520%;
+	right: 85%;
+}
+
+#vida2eq2{
+	position: relative;
+	width: 80%;
+	bottom: 500%;
+	right: 67%;
+}
+
+#int2eq2{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 576%;
+	right: 65%;
+}
+
+#jugador3Eq2{
+	position: relative;
+	width: 40%;
+	bottom: 540%;
+	right: 85%;
+}
+
+#vida3eq2{
+	position: relative;
+	width: 80%;
+	bottom: 525%;
+	right: 67%;
+}
+
+#int3eq2{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 598%;
+	right: 65%;
+}
+
+#jugador4Eq2{
+	position: relative;
+	width: 40%;
+	bottom: 562%;
+	right: 85%;
+}
+
+#vida4eq2{
+	position: relative;
+	width: 80%;
+	bottom: 545%;
+	right: 67%;
+}
+
+#int4eq2{
+	position: relative;
+	font-family: 'VT323', serif;
+	bottom: 620%;
+	right: 65%;
+	color: white;
+}
+
+#btn1eq2{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 22%;
+}
+
+#btn2eq2{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 18%;
+}
+
+#btn3eq2{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 14%;
+}
+
+#btn4eq2{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 10%;
+}
+
+#btn5eq2{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 6%;
+}
+
+/*Equipo 3*/
+
+#jugador1Eq3{
+	position: relative;
+	width: 40%;
+	bottom: 500%;
+	right: 115%;
+}
+
+#vida1eq3{
+	position: relative;
+	width: 80%;
+	bottom: 480%;
+	right: 80%;
+}
+
+#int1eq3{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 554%;
+	right: 78%;
+}
+
+#jugador2Eq3{
+	position: relative;
+	width: 40%;
+	bottom: 520%;
+	right: 115%;
+}
+
+#vida2eq3{
+	position: relative;
+	width: 80%;
+	bottom: 500%;
+	right: 80%;
+}
+
+#int2eq3{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 576%;
+	right: 78%;
+}
+
+#jugador3Eq3{
+	position: relative;
+	width: 40%;
+	bottom: 540%;
+	right: 115%;
+}
+
+#vida3eq3{
+	position: relative;
+	width: 80%;
+	bottom: 525%;
+	right: 80%;
+}
+
+#int3eq3{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 598%;
+	right: 78%;
+}
+
+#jugador4Eq3{
+	position: relative;
+	width: 40%;
+	bottom: 562%;
+	right: 115%;
+}
+
+#vida4eq3{
+	position: relative;
+	width: 80%;
+	bottom: 545%;
+	right: 80%;
+}
+
+#int4eq3{
+	position: relative;
+	font-family: 'VT323', serif;
+	bottom: 620%;
+	right: 78%;
+	color: white;
+}
+
+#btn1eq3{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 30%;
+}
+
+#btn2eq3{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 26%;
+}
+
+#btn3eq3{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 22%;
+}
+
+#btn4eq3{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 18%;
+}
+
+#btn5eq3{
+	position: relative;
+	width: 10%;
+	bottom: 1150%;
+	right: 14%;
+}
+
+/*Flujo*/
+#flujo{
+	position: relative;
+	bottom: 157%;
+	width: 55%;
+	left: 65%;
+}
+
+#log{
+	position: relative;
+	font-family: 'VT323', serif;
+	color: white;
+	bottom: 202%;
+	left: 17%;
+	font-size: 1.2em;
+}
