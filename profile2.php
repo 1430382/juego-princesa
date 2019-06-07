@@ -8,6 +8,15 @@ include ("backend/conexion.php");
 $usuario = $_SESSION['nombre'];
 
 ////
+$conn=mysqli_connect("localhost","root","","test") or die("Error in connection");
+$query = mysqli_query($conn,"SELECT idjugadores from JUGADORES WHERE matricula='$usuario'");
+    while ($result=  mysqli_fetch_array($query)) {
+
+      $idjugador=$result['idjugadores'];
+      }
+
+//echo $idjugador;
+///
 
 ?>
 
@@ -180,7 +189,7 @@ $usuario = $_SESSION['nombre'];
           <?php
             $res="SELECT JUGADORES.nombre, ITEMS.nombre, INVENTARIO_ITEMS.iditems FROM JUGADORES
                 INNER JOIN INVENTARIO_ITEMS
-                ON JUGADORES.idjugadores = INVENTARIO_ITEMS.idjugadores
+                ON JUGADORES.idjugadores = '$idjugador'
                 INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems;";
             $res=$con->query($res);
             while ($row = $res->fetch_array()) {
