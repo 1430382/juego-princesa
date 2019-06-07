@@ -175,15 +175,18 @@ $usuario = $_SESSION['nombre'];
     </script>
 
         </h2>
-          <form class="" method="post" style= "float:left;margin-left:100px;margin-top:200px;">
+          <form class="" method="post" style= "float:left;margin-left:150px;margin-top:150px;">
             <select name="users" id="users">
           <?php
-            $res="select iditems,CONCAT(' Item o maldición: ', nombre,' costo: ',precio,' ') as ITEMS FROM ITEMS;";
+            $res="SELECT JUGADORES.nombre, ITEMS.nombre, INVENTARIO_ITEMS.iditems FROM JUGADORES
+                INNER JOIN INVENTARIO_ITEMS
+                ON JUGADORES.idjugadores = INVENTARIO_ITEMS.idjugadores
+                INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems;";
             $res=$con->query($res);
             while ($row = $res->fetch_array()) {
               ?>
-              <option value="<?php echo $row['iditems'];?>">
-              <?php echo $row['ITEMS'];?>
+              <option value="<?php echo $row['nombre'];?>">
+              <?php echo $row['nombre'];?>
               </option>
               <?php
             }
@@ -192,7 +195,7 @@ $usuario = $_SESSION['nombre'];
   </select>
 
         <!--Barra de selección -->
-          <button class="button button1" style= "float:left;margin-left:-10px;margin-top:10px;" type="submit" name="registrar" >usar</button>
+          <button class="button button1" style= "float:left;margin-left:-10px;margin-top:100px;" type="submit" name="registrar" >usar</button>
           </form>
         <!--Señal -->
         <div class="col-lg-12 text-center"style="margin: 0;padding: 0;position: relative;">
