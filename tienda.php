@@ -10,6 +10,7 @@ include ("backend/conexion.php");
 
 /////////
 
+///
 
 $objeto='';
 ///// VALIDATE THE POST
@@ -23,11 +24,14 @@ if(isset($_POST['users'])){
 if(isset($_POST['registrar'])){
 
 
-	var_dump($users);
-	var_dump($objeto);
-
 	 $query = "INSERT INTO INVENTARIO_ITEMS (idjugadores,iditems) VALUES ('".$users."','".$objeto."')";
-	if($con ->query($query)== TRUE){
+	 //$query = "UPDATE  JUGADORES SET iditems='".$objeto."' WHERE idjugadores='".$users."'";
+	 if($con ->query($query)== TRUE){
+	 	$conn=mysqli_connect("localhost","root","","test") or die("Error in connection");
+		$query = mysqli_query($conn,"UPDATE  JUGADORES SET iditems='".$objeto."' WHERE idjugadores='".$users."'");
+		///////////
+
+
 		echo"<div class='alert alert-success alert-dismissable'>
 		<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
 		<strong>Exitoso!</strong> La compra se ha guardado correctamente.
@@ -40,8 +44,9 @@ if(isset($_POST['registrar'])){
 		</div>";
 			}
 	$con->close();
-//   }
+	$conn->close();
 
+//   }
 }
  ?>
 

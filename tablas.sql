@@ -72,7 +72,7 @@ foreign key (idjugadores) references JUGADORES (idjugadores)
  CREATE PROCEDURE Clon_de_sombras(_ID INT(25))
    BEGIN
    UPDATE ASISTENCIA SET total=total+1 WHERE idasistencia=_ID;
-   UPDATE JUGADORES SET vida=vida-7  WHERE idasistencia=_ID;
+   --UPDATE JUGADORES SET vida=vida-7  WHERE idjugadores=_ID;
    END //
  DELIMITER ;
 
@@ -83,39 +83,41 @@ select u.ROL,u.MATRICULA from Usuario u where u.NOMBRE = NOMBRE and u.MATRICULA=
 END$$
 DELIMITER ;
 
- DELIMITER //
- CREATE PROCEDURE MuertePrematura(_MATRICULA int(20))
-   BEGIN
-   UPDATE JUGADORES SET vida=vida-15 WHERE matricula=_MATRICULA;    
-   END //
- DELIMITER ;
+DELIMITER //
+CREATE PROCEDURE MuertePrematura(_MATRICULA int(20))
+ BEGIN
+ --UPDATE JUGADORES SET vida=vida-15 WHERE matricula=_MATRICULA;
+ UPDATE JUGADORES SET vida=vida+1 WHERE fantasma=_fantasma and matricula=_MATRICULA;
+ END //
+DELIMITER ;
 
  DELIMITER $$
-CREATE PROCEDURE Lagrimas_de_amigos(_NUMERO_DE_EQUIPO INT(25))
+CREATE PROCEDURE Lagrimas_de_amigos(_NUMERO_DE_EQUIPO INT(25),_fantasma tinyint(1))
 BEGIN
-   UPDATE JUGADORES SET vida=vida-60 WHERE equipo=_NUMERO_DE_EQUIPO; 
+   --UPDATE JUGADORES SET vida=vida-15 WHERE equipo=_NUMERO_DE_EQUIPO;
+   UPDATE JUGADORES SET vida=vida+5 WHERE fantasma=_fantasma and equipo=_NUMERO_DE_EQUIPO;
    END$$
 DELIMITER ;
 
  DELIMITER $$
 CREATE PROCEDURE Reloj_de_arena(_ID INT(25))
 BEGIN
-   UPDATE MISIONES SET fecha=fecha+1  WHERE idjugadores=_ID; 
-   UPDATE JUGADORES SET vida=vida-5  WHERE idjugadores=_ID;
+   UPDATE MISIONES SET fecha=fecha+1  WHERE idjugadores=_ID;
+   --UPDATE JUGADORES SET vida=vida-5  WHERE idjugadores=_ID;
    END$$
 DELIMITER ;
  DELIMITER $$
 CREATE PROCEDURE teletransportacion_mayor(_ID INT(25),_NUMERO_DE_EQUIPO INT(20))
-BEGIN     
+BEGIN
 	 UPDATE JUGADORES SET idjugadores=_ID WHERE equipo=_NUMERO_DE_EQUIPO;
-     UPDATE JUGADORES SET vida=vida-40  WHERE idjugadores=_ID;
+   --UPDATE JUGADORES SET vida=vida-40  WHERE idjugadores=_ID;
    END$$
 DELIMITER ;
  DELIMITER $$
 CREATE PROCEDURE teletransportacion_menor(_ID INT(25),_ID1 INT(25))
 BEGIN
     UPDATE MISIONES SET idjugadores=_ID1 WHERE idjugadores=_ID;
-   UPDATE JUGADORES SET vida=vida-7  WHERE idjugadores=_ID;
+   --UPDATE JUGADORES SET vida=vida-7  WHERE idjugadores=_ID;
    END$$
 DELIMITER ;
 
@@ -123,9 +125,6 @@ DELIMITER ;
 CREATE PROCEDURE tortura_simple(_ID INT(25))
 BEGIN
  UPDATE MISIONES set idjugadores = CAST(RAND() * 9 AS UNSIGNED) where idjugadores=_ID;
- UPDATE JUGADORES SET vida=vida-5  WHERE idjugadores=_ID;
+ --UPDATE JUGADORES SET vida=vida-5  WHERE idjugadores=_ID;
    END$$
 DELIMITER ;
-
-
-
