@@ -21,9 +21,16 @@ $query = mysqli_query($conn,"SELECT idjugadores from JUGADORES WHERE matricula='
 if(isset($_POST['users'])){
 	$users=$_POST['users'];
 }
-///
+
+///if (!($res=$con->query("SELECT iditems from INVENTARIO_ITEMS WHERE idjugadores='$usuario'"))) {
 if(isset($_POST['registrar'])){
-  if (!($res=$con->query("SELECT iditems from JUGADORES WHERE matricula='$usuario'"))) {
+  if (!($res=$con->query("
+SELECT JUGADORES.matricula,JUGADORES.nombre,JUGADORES.apellidos,JUGADORES.equipo,
+JUGADORES.genero,JUGADORES.vida,JUGADORES.fantasma,JUGADORES.idusuarios,
+INVENTARIO_ITEMS.iditems,INVENTARIO_ITEMS.idjugadores FROM JUGADORES
+INNER JOIN INVENTARIO_ITEMS
+ON JUGADORES.idjugadores ='$idjugador'
+INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
   	}else{
   		/*E imprimimos el resultado para ver que el ejemplo ha funcionado*/
   		if($row = $res->fetch_assoc()){
@@ -37,6 +44,7 @@ if(isset($_POST['registrar'])){
         $fantasma=$_SESSION['fantasma'];
         $_SESSION['idjugadores']=$row['idjugadores'];
         $idjugadores=$_SESSION['idjugadores'];
+  
   			if($row['iditems']==1)
         {
   					if (!$con->query("CALL MuertePrematura('$matricula')"))
@@ -107,7 +115,7 @@ if(isset($_POST['registrar'])){
   			}
 
   		}else{
-  			echo "No se armani";
+  			echo "No se puede";
   		}
 
   	}
@@ -206,6 +214,7 @@ $conn->close();
                  <td>".$result['equipo']."</td>
                 </tr>";
               }
+
       ?>
       </tbody>
     </table>

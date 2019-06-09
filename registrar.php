@@ -37,7 +37,7 @@ if(isset($_POST['fantasma'])){
 }
 //////////////REGISTRAR
 if(isset($_POST['registrar'])){
-	var_dump($fantasma);
+	//var_dump($fantasma);
 	 $query = "INSERT INTO JUGADORES (matricula,nombre,apellidos,equipo,genero,vida,fantasma) VALUES ('".$matricula."','".$nombre."','".$apellidos."','".$equipo."','".$genero."','".$vida."','".$fantasma."')";
 	if($con ->query($query)== TRUE){
 		echo"<div class='alert alert-success alert-dismissable'>

@@ -12,7 +12,7 @@ include ("backend/conexion.php");
 
 ///
 
-$objeto='';
+//$objeto='';
 ///// VALIDATE THE POST
 if(isset($_POST['objeto'])){
  	 $objeto=$_POST['objeto'];
@@ -22,29 +22,22 @@ if(isset($_POST['users'])){
 }
 ////////
 if(isset($_POST['registrar'])){
-
-
 	 $query = "INSERT INTO INVENTARIO_ITEMS (idjugadores,iditems) VALUES ('".$users."','".$objeto."')";
-	 //$query = "UPDATE  JUGADORES SET iditems='".$objeto."' WHERE idjugadores='".$users."'";
-	 if($con ->query($query)== TRUE){
-	 	$conn=mysqli_connect("localhost","root","","test") or die("Error in connection");
-		$query = mysqli_query($conn,"UPDATE  JUGADORES SET iditems='".$objeto."' WHERE idjugadores='".$users."'");
-		///////////
-
-
+	
+	 if($con ->query($query)== TRUE)
+	 {
 		echo"<div class='alert alert-success alert-dismissable'>
 		<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
 		<strong>Exitoso!</strong> La compra se ha guardado correctamente.
 	</div>";
-
 	}else{
 		echo "<div class='alert alert-danger alert-dismissable'>
 		<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
 		<strong>Problema!</strong> No se pudo guardar la compra, vuelva a intentar.
 		</div>";
 			}
+
 	$con->close();
-	$conn->close();
 
 //   }
 }
@@ -206,7 +199,7 @@ if(isset($_POST['registrar'])){
 												</label>
 
 											</div>
-													<select name="users" id="users" style="margin-left: 10.25em;margin-top: 20px;">
+								<select name="users" id="users" style="margin-left: 10.25em;margin-top: 20px;">
 							<?php
 					 			$res="select idjugadores,CONCAT(nombre,' ',apellidos,' ') as JUGADORES FROM JUGADORES;";
 					 			$res=$con->query($res);
