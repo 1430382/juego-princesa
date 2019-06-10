@@ -6,7 +6,9 @@ include ("backend/conexion.php");
 // Se crea una instancia de Database
 //$log = new Database();
 $usuario = $_SESSION['nombre'];
-
+date_default_timezone_set("America/Monterrey");
+$fechactual=date('y-m-d');
+//echo "$fechactual";
 ////
 $conn=mysqli_connect("localhost","root","","test") or die("Error in connection");
 $query = mysqli_query($conn,"SELECT idjugadores from JUGADORES WHERE matricula='$usuario'");
@@ -15,7 +17,12 @@ $query = mysqli_query($conn,"SELECT idjugadores from JUGADORES WHERE matricula='
       $idjugador=$result['idjugadores'];
       }
 
-//echo $idjugador;
+$idjugador=$idjugador;
+
+$idjugadores=$idjugador;
+$_SESSION['idjugador']=$idjugador;
+//echo $_idjugador;
+//echo $_SESSION['_idjugador'];
 
 ///
 if(isset($_POST['users'])){
@@ -25,12 +32,12 @@ if(isset($_POST['users'])){
 ///if (!($res=$con->query("SELECT iditems from INVENTARIO_ITEMS WHERE idjugadores='$usuario'"))) {
 if(isset($_POST['registrar'])){
   if (!($res=$con->query("
-SELECT JUGADORES.matricula,JUGADORES.nombre,JUGADORES.apellidos,JUGADORES.equipo,
-JUGADORES.genero,JUGADORES.vida,JUGADORES.fantasma,JUGADORES.idusuarios,
-INVENTARIO_ITEMS.iditems,INVENTARIO_ITEMS.idjugadores FROM JUGADORES
-INNER JOIN INVENTARIO_ITEMS
-ON JUGADORES.idjugadores ='$idjugador'
-INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
+  SELECT JUGADORES.matricula,JUGADORES.nombre,JUGADORES.apellidos,JUGADORES.equipo,
+  JUGADORES.genero,JUGADORES.vida,JUGADORES.fantasma,JUGADORES.idusuarios,
+  INVENTARIO_ITEMS.iditems,INVENTARIO_ITEMS.idjugadores, ITEMS.fecha FROM JUGADORES
+  INNER JOIN INVENTARIO_ITEMS
+  ON JUGADORES.idjugadores ='$idjugador'
+  INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
   	}else{
   		/*E imprimimos el resultado para ver que el ejemplo ha funcionado*/
   		if($row = $res->fetch_assoc()){
@@ -44,11 +51,12 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
         $fantasma=$_SESSION['fantasma'];
         $_SESSION['idjugadores']=$row['idjugadores'];
         $idjugadores=$_SESSION['idjugadores'];
-  
+
   			if($row['iditems']==1)
         {
   					if (!$con->query("CALL MuertePrematura('$matricula')"))
               {
+                $query ="CALL MuertePrematura('$matricula')";
                 echo"<div class='alert alert-success alert-dismissable'>
             		<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
             		<strong>Exitoso!</strong> El objeto se a utilizado correctamente.
@@ -57,8 +65,9 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
 
         }else if($row['iditems']==2)
         {
-          if (!$con->query("CALL Lagrimas_de_amigos('$equipo','$fantasma')"))
+          if (!$con->query("CALL Lagrimas_de_amigos('$equipo')"))
             {
+              $query ="CALL Lagrimas_de_amigos('$equipo'')";
               echo"<div class='alert alert-success alert-dismissable'>
               <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
@@ -67,8 +76,9 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
   			}
   			else if($row['iditems']==3)
         {
-          if (!$con->query("CALL Reloj_de_arena($idjugadores')"))
+          if (!$con->query("CALL Reloj_de_arena('$idjugadores')"))
             {
+              $query ="CALL Reloj_de_arena('$idjugadores')";
               echo"<div class='alert alert-success alert-dismissable'>
               <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
@@ -77,8 +87,9 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
   			}
         else if($row['iditems']==4)
         {
-          if (!$con->query("CALL Clon_de_sombras($idjugadores')"))
+          if (!$con->query("CALL Clon_de_sombras('$idjugadores')"))
             {
+              $query ="CALL Clon_de_sombras('$idjugadores')";
               echo"<div class='alert alert-success alert-dismissable'>
               <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
@@ -87,8 +98,9 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
   			}
         else if($row['iditems']==5)
         {
-          if (!$con->query("CALL teletransportacion_menor($idjugadores','$equipo')"))
+          if (!$con->query("CALL teletransportacion_menor('$idjugadores','$equipo')"))
             {
+              $query ="CALL teletransportacion_menor('$idjugadores','$equipo')";
               echo"<div class='alert alert-success alert-dismissable'>
               <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
@@ -97,8 +109,9 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
   			}
         else if($row['iditems']==6)
         {
-          if (!$con->query("CALL teletransportacion_mayor($idjugadores','$equipo')"))
+          if (!$con->query("CALL teletransportacion_mayor('$idjugadores','$equipo')"))
             {
+              $query ="CALL teletransportacion_mayor('$idjugadores','$equipo')";
               echo"<div class='alert alert-success alert-dismissable'>
               <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
@@ -108,14 +121,42 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
         else if($row['iditems']==7)
         {
       //veneno menor
+      if (!$con->query("CALL veneno_menor('$idjugadores','$fechactual')"))
+        {
+          $query ="CALL veneno_menor('$idjugadores','$fechactual')";
+          echo"<div class='alert alert-success alert-dismissable'>
+          <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
+          <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
+        </div>";
+        }
   			}
         else if($row['iditems']==8)
         {
-          //veneno medio
+          if (!$con->query("CALL veneno_medio('$equipo','$fechactual')"))
+            {
+              $query ="CALL veneno_medio('$equipo','$fechactual')";
+              echo"<div class='alert alert-success alert-dismissable'>
+              <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
+              <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
+            </div>";
+            }
   			}
+        else if($row['iditems']==9)
+        {
+          echo '<script language="javascript">';
+          echo 'alert("El de tortura simple no funciona.")';
+          echo '</script>';
+        /*  if (!$con->query("CALL tortura_simple('$users','$objetivo')"))
+            {
+              echo"<div class='alert alert-success alert-dismissable'>
+              <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
+              <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
+            </div>";
+          }*/
+        }
 
   		}else{
-  			echo "No se puede";
+  			echo "No existen más items";
   		}
 
   	}
@@ -250,7 +291,7 @@ $conn->close();
                   echo "<tr>
 
                   </tr>";
-                  echo ' <table border=0> <tr><td><img src="img/vida/100.png" style="color:white;position: absolute; top: 50px; right: 10%; width: 25%; alt="loading" /><td><td></td><tr></table>';
+                  echo ' <table border=0> <tr><td><img src="img/vida/100.png" style="color:white;position: absolute; top: 50px; right: 18%; width: 25%; alt="loading" /><td><td></td><tr></table>';
 
                 }
                 else if ($result['vida']<=75 && $result['vida']>50 ) {
@@ -264,21 +305,21 @@ $conn->close();
                   echo "<tr>
 
                   </tr>";
-                  echo ' <table border=0> <tr><td><img src="img/vida/50.png" style="color:white;position: absolute; top: 50px; right: 10%; width: 25%; alt="loading" /><td><td></td><tr></table>';
+                  echo ' <table border=0> <tr><td><img src="img/vida/50.png" style="color:white;position: absolute; top: 50px; right: 25%; width: 15%; alt="loading" /><td><td></td><tr></table>';
 
                 }
                 else if ($result['vida']<=25 && $result['vida']>1 ) {
                   echo "<tr>
 
                   </tr>";
-                  echo ' <table border=0> <tr><td><img src="img/vida/25.png" style="color:white;position: absolute; top: 50px; right: 10%; width: 25%; alt="loading" /><td><td></td><tr></table>';
+                  echo ' <table border=0> <tr><td><img src="img/vida/25.png" style="color:white;position: absolute; top: 40px; right: 35%; width: 7%; alt="loading" /><td><td></td><tr></table>';
 
                 }
                 else if ($result['vida']<1 ) {
                   echo "<tr>
 
                   </tr>";
-                  echo ' <table border=0> <tr><td><img src="img/vida/0.png" style="color:white;position: absolute; top: 50px; right: 10%; width: 25%; alt="loading" /><td><td></td><tr></table>';
+                  echo ' <table border=0> <tr><td><img src="img/vida/0.png" style="color:white;position: absolute; top: 40px; right: 35%; width: 7%; alt="loading" /><td><td></td><tr></table>';
 
                 }
                 }
