@@ -1,3 +1,12 @@
+<?php
+if(!isset($_SESSION)) {
+    //Revisa si la sesión ha sido inciada ya
+    session_start();
+}
+if($_SESSION['rol']==0){
+	header("location: login.php");
+}
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -125,3 +134,9 @@ $(document).ready( function () {
 
 </body>
 </html>
+<div class="" style="color:white;margin-top:500px; margin-left:auto;">
+<a href="logout.php">
+    <img src="img/exit.png" alt="Reglas del juego" class="center" id="navbar-img" >
+    <h1 class="center-text">Atras</h1>
+  </a>
+</div>

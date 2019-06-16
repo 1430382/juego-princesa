@@ -31,7 +31,7 @@ if($_SESSION['rol']==0){
 	<!---
 	  HEADER
 	   -------------->
-	<?php include "header.php" ?>
+	<?php include "header.admin.php" ?>
 
 
 

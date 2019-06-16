@@ -1,8 +1,14 @@
 <?php
 // Permite mostrar los errores
 error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
+//ini_set('display_errors', '1');
+if(!isset($_SESSION)) {
+    //Revisa si la sesión ha sido inciada ya
+    session_start();
+}
+if($_SESSION['rol']==0){
+	header("location: login.php");
+}
 // Inicia la sesión, necesario para usar las utilidades de SESSION
 session_start();
 // Se incluye el archivo con la clase Database
@@ -579,10 +585,20 @@ label {
 			</div>
 		</div>
 	</div>
-
+<style media="screen">
+div.ex1 {
+background-color: white;
+width: auto;
+height: 300px;
+overflow: scroll;
+}
+</style>
 	<!--Información del equipo-->
 	 <div class="card bordes" style="max-width: 32rem;">
 		<!--Nombre del equipo-->
+    <div class="ex1">
+
+
 		<div class="card-header border-dark header gold shadow "><h5>LISTA DE OBJETOS</h5></div>
 		<!--Cuerpo-->
 		<div class="card-body text-success bg-dark body contenedor">
@@ -624,7 +640,7 @@ label {
 
 	?>
 
-
+</div>
 	</div>
 	<div class="card-footer border-success foot">
 	<button type="button" class="boton white" data-toggle='modal'  data-target='#exampleModal'>COMPRAR</button></div>
@@ -866,3 +882,9 @@ $("input:radio[type=radio]").click(function() {
 });
 </script>
 -->
+<div style="color:white;margin-top:100px; margin-left:auto;">
+<a href="logout.php">
+    <img src="img/exit.png" class="center" id="navbar-img" >
+    <h1 class="center-text">Atras</h1>
+  </a>
+</div>

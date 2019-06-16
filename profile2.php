@@ -5,6 +5,13 @@ ini_set('display_errors', '1');
 session_start();
 require 'functions.php';
 include ("backend/conexion.php");
+if(!isset($_SESSION)) {
+    //Revisa si la sesión ha sido inciada ya
+    session_start();
+}
+if($_SESSION['rol']==0){
+	header("location: login.php");
+}
 // Se crea una instancia de Database
 //$log = new Database();
 $usuario = $_SESSION['usuario'];
@@ -31,7 +38,15 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
       /////
 
 //
+$_SESSION['nombre']=$nombre;
+$_SESSION['apellidos']=$apellidos;
+$_SESSION['$idjugadores']=$idjugadores;
+$_SESSION['$vida']=$vida;
+$_SESSION['$equipo']=$equipo;
+$_SESSION['$fantasma']=$fantasma;
+$_SESSION['$matricula']=$matricula;
 $_SESSION['idjugador']=$idjugadores;
+
 //echo $nombre;
 //echo $_SESSION['_idjugador'];
 
@@ -39,7 +54,58 @@ $_SESSION['idjugador']=$idjugadores;
 if(isset($_POST['users'])){
 	$users=$_POST['users'];
 }
+////////////////
 
+//Configuracion servidor mail
+date_default_timezone_set("America/Monterrey");
+$fechactual=date('y-m-d');
+$fechactual=date('Y-m-d', strtotime($fechactual));
+
+function correo($msg)
+{
+  require 'PHPMailer/PHPMailerAutoload.php';
+  //Create a new PHPMailer instance
+  $mail = new PHPMailer();
+  $mail->IsSMTP();
+  $con=mysqli_connect("localhost","root","","test") or die("Error in connection");
+  $equipo=$_SESSION['$equipo'];
+  //var_dump($equipo);
+  if (!($res=$con->query("SELECT MATRICULA FROM JUGADORES where equipo!='$equipo'"))) {
+  }else{
+    while ($row = $res->fetch_assoc()) {
+      ///printf ("%s\n", $row["MATRICULA"]);
+      $test=$row["MATRICULA"];
+    //  echo "-----";
+      //echo "$test";
+      $s = "" . trim($test) . "@upv.edu.mx";
+      echo "$s";
+//////////////////
+      $mail->From = "pruebasmedicohospital@gmail.com"; //remitente
+      $mail->SMTPAuth = true;
+      $mail->SMTPSecure = 'tls'; //seguridad
+      $mail->Host = "smtp.gmail.com"; // servidor smtp
+      $mail->Port = 587; //puerto
+      $mail->Username ='pruebasmedicohospital@gmail.com'; //nombre usuario
+      $mail->Password = 'Lololol1'; //contraseña
+      //Agregar destinatario
+      //Campos del correo
+      $subject='Items y/o maldiciones-ADDO';
+      $message='Usted ha sido maldecido';
+      $mail->AddAddress($s);
+      $mail->Subject = $subject;
+      $mail->Body = $msg;
+      //Avisar si fue enviado o no y dirigir al index
+      if ($mail->Send()) {
+          echo'<script type="text/javascript">
+                 alert("Enviado Correctamente");
+              </script>';
+      }
+  }
+  }
+}
+//$s = "Hello " . trim($matricula) . "@upv.edu.mx";
+//echo "$s";
+//////////////////////
 
 ///if (!($res=$con->query("SELECT iditems from INVENTARIO_ITEMS WHERE idjugadores='$usuario'"))) {
 if(isset($_POST['registrar'])){
@@ -71,6 +137,8 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
               $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
               $msg = $nombre." ha usado ".$nombreitem." en ".$nombre;
               $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
+
+
         }else if($row['iditems']==2)
         {
            $iditems=$row['iditems'];
@@ -184,6 +252,7 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
         $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
         $msg = $nombre." ha usado ".$nombreitem." en todos menos en ".$equipo;
         $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
+        correo($msg);
   			}
         else if($row['iditems']==8)
         {
@@ -203,6 +272,7 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
            $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
            $msg = $nombre." ha usado ".$nombreitem." en todos menos en ".$equipo;
            $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
+           correo($msg);
   			}
         else if($row['iditems']==9)
         {
@@ -702,6 +772,16 @@ echo "</div>
         </div>
       </div>
 </div>
+<div class="" style="color:white;margin-top:auto; margin-left:auto;">
+
+
+<a href="logout.php">
+    <img src="img/exit.png" alt="Reglas del juego" class="center" id="navbar-img" >
+    <h1 class="center-text">Atras</h1>
+  </a>
+
+</div>
+
   <!-- JS -->
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
 

@@ -4,6 +4,9 @@ if(!isset($_SESSION)) {
     //Revisa si la sesión ha sido inciada ya
     session_start();
 }
+if($_SESSION['rol']==0){
+	header("location: login.php");
+}
 $usuario = $_SESSION['usuario'];
 $rol=$_SESSION['id_rol'];
 //var_dump($usuario);
@@ -832,7 +835,7 @@ $con->close();
 
 
 	<div class="bottom-right" >
-		<a href="reglas.php">
+		<a href="reglas.admin.php">
 			<img src="img/book.png" alt="Reglas del juego" class="center" id="navbar-img">
 			<h1 class="center-text">Reglas</h1>
 		</a>
@@ -846,3 +849,9 @@ $con->close();
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
+<div style="color:white;margin-top:auto; margin-left:auto;">
+<a href="logout.php">
+    <img src="img/exit.png" class="center" id="navbar-img" >
+    <h1 class="center-text">Atras</h1>
+  </a>
+</div>

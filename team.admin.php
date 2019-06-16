@@ -8,7 +8,6 @@ if(!isset($_SESSION)) {
 if($_SESSION['rol']==0){
 	header("location: login.php");
 }
-
 $usuario = $_SESSION['idjugador'];
 //echo "<h2>" . $usuario . "</h2>";
  ?>
@@ -71,20 +70,20 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
       $matricula=$result['matricula'];
       //var_dump($equipo);
       }
+
 ?>
 <body style="background-image: url(img/background-teams.jpg);">
 	<!---
 	  HEADER
 	   -------------->
-	<?php include "header.php" ?>
+	<?php include "header.admin.php" ?>
 
 
   <!--Información del equipo-->
   <div class="col mb-5">
      <?php
      include_once 'connect.php';
-
-     $sentencia= "SELECT * from JUGADORES where equipo='$equipo' LIMIT 1";
+     $sentencia= "SELECT * from JUGADORES where equipo='Equipo 1' LIMIT 1";
      foreach ($base_de_datos->query($sentencia) as $row){
          $equipoid = $row['equipo'];
          //var_dump($equipoid);
@@ -98,7 +97,7 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
              $hp=0; #Para sumar la vida de los jugadores.
              $conteo=0; #Para contar a los integrantes de cada equipo.
              $muestra=0; #Para mostrar el boton del su equipo
-             $sentencia2= "SELECT * FROM JUGADORES WHERE equipo ='$equipo'";
+             $sentencia2= "SELECT * FROM JUGADORES WHERE equipo ='Equipo 1'";
              foreach ($base_de_datos->query($sentencia2) as $row2){
                  $ps = $row2['vida'];
                  $hp=$hp+$row2['vida'];
@@ -113,7 +112,6 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
                  {
                    echo "<div class='col-2'><img src='img/teams/steveDead.png' class='userIcon' width='40'></div>";
                  }
-
            echo "<div class='col-10'>";
            #<!--Nombre del jugador-->
              echo $row2['nombre'];
@@ -177,13 +175,10 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
               }#Fin de sentencia 3
 
              }#Fin de sentencia 2
-
              #Seccion de promedio de vida
              $promedio=$hp/$conteo;
              $band = 0;
-
                echo "<div class='text-center mt-4 white'>";
-
                for ($i = 1; $i <= 10; $i++) {
                  if($band == 1){
                    echo '<img src="img/teams/hpVacio.png" width="20">';
@@ -199,17 +194,12 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
                  }
                  }
                  }
-
-
                 echo "
                  <br>
                   PROMEDIO: ".$promedio." /100  PS
                   </div>";
                $hp=0;
               $conteo=0;
-
-
-
          echo "</div> <!--Fin del Cuerpo-->";
            echo "<div class='card-footer border-success foot'>";
            if($muestra==1)
@@ -224,7 +214,7 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
        </div> <!--FIN DE LOS EQUIPOS-->
        <!--  -->
        <!--Información del equipo-->
-       <div class="col mb-5" style= "float:left;margin-left:500px;margin-top:-750px;">
+       <div class="col mb-5" style= "float:left;margin-left:500px;margin-top:-700px;">
           <?php
           include_once 'connect.php';
 
@@ -257,7 +247,6 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
                       {
                         echo "<div class='col-2'><img src='img/teams/steveDead.png' class='userIcon' width='40'></div>";
                       }
-
                 echo "<div class='col-10'>";
                 #<!--Nombre del jugador-->
                   echo $row2['nombre'];
@@ -287,7 +276,6 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
                         {
                           echo "<img src='img/teams/vivo.png' class='ml-2' title='Estas vivo, por ahora...' width='20'>";
                         }
-
                         if($row2['vida']>=100)
                         {
                           echo "<img src='img/teams/star.gif' class='ml-2' title='Derecho a reclamar a la princesa.' width='20'>";
@@ -300,13 +288,11 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
 
                       echo "</div> <!--Fin del cuerpo del jugador-->";
                   echo "</div> <!--Fin del jugador 1-->";
-
                      #Comprobando si el usuario actual se encuentra en el equipo
                      if($row2['idjugadores']==$user && $muestra==0)
                     {
                       $muestra=1;
                     }
-
                     #Verificando si el equipo tiene items grupales
                     $sentencia3= "SELECT * FROM INVENTARIO_ITEMS";
                     foreach ($base_de_datos->query($sentencia3) as $row3){
@@ -319,13 +305,10 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
                        echo "<img src='img/tienda/MostrarItems/teleportMayorCuadro.png' class='ml-5' title='Estado fantasma' width='50'>";
                      }
                    }#Fin de sentencia 3
-
                   }#Fin de sentencia 2
-
                   #Seccion de promedio de vida
                   $promedio=$hp/$conteo;
                   $band = 0;
-
                     echo "<div class='text-center mt-4 white'>";
 
                     for ($i = 1; $i <= 10; $i++) {
@@ -343,17 +326,12 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
                       }
                       }
                       }
-
-
                      echo "
                       <br>
                        PROMEDIO: ".$promedio." /100  PS
                        </div>";
                     $hp=0;
                    $conteo=0;
-
-
-
               echo "</div> <!--Fin del Cuerpo-->";
                 echo "<div class='card-footer border-success foot'>";
                 if($muestra==1)
@@ -369,7 +347,7 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
        <!--  -->
        <!--  -->
        <!--Información del equipo-->
-       <div class="col mb-5" style= "float:left;margin-left:1000px;margin-top:-750px;">
+       <div class="col mb-5" style= "float:left;margin-left:1000px;margin-top:-700px;">
           <?php
           include_once 'connect.php';
 
@@ -512,17 +490,17 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
           ?> <!--Fin del ciclo PHP-->
             </div> <!--FIN DE LOS EQUIPOS-->
        <!--  -->
-       <style media="screen">
-       div.ex1 {
+<style media="screen">
+div.ex1 {
   background-color: black;
   width: 400px;
   height: 200px;
   overflow: scroll;
 }
-       </style>
+</style>
        <!--Boton de AYUDA que seguira a la direccion de la pantalla-->
        <div class="bottom-right" >
-       <div class=" mr-5 mt-3 " >
+       <div class=" mr-5 mt-3" >
                   <!--Inicio del Log de Actividades-->
                 <div class="card bordes" >
                    <!--Nombre del equipo-->
@@ -541,7 +519,6 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
                        }
                        ?>
                    </div>
-
                    <div class="card-footer border-success foot dark_gray" >
                            <div id="reloj" style="font-size:13px;"></div>
                    </div>
@@ -550,9 +527,15 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
        	</div>
        </body>
        </html>
-       <div style="color:white;margin-top:auto; margin-left:auto;">
+       <div style="color:white;margin-top:-70px; margin-left:auto;">
        <a href="logout.php">
            <img src="img/exit.png" class="center" id="navbar-img" >
            <h1 class="center-text">Atras</h1>
+         </a>
+       </div>
+       <div class="bottom-right" >
+         <a href="reglas.admin.php">
+           <img src="img/book.png" alt="Reglas del juego" class="center" id="navbar-img">
+           <h1 class="center-text">Reglas</h1>
          </a>
        </div>

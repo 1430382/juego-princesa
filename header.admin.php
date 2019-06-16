@@ -32,7 +32,7 @@
 
       <li class="nav-item">
         <img src="img/navbar/stats.gif" alt="stats section" id="navbar-img" class="center">
-        <a class="nav-link" href="team.php">Estadísticas</a>
+        <a class="nav-link" href="team.admin.php">Estadísticas</a>
       </li>
     </ul>
   </div>
