@@ -41,13 +41,6 @@ CREATE TABLE `INVENTARIO_ITEMS` (
   PRIMARY KEY (idinventario,idjugadores,iditems)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `INVENTARIO_MISIONES` (
-  `MISIONES_id` int(11) NOT NULL,
-  PRIMARY KEY (`MISIONES_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
 CREATE TABLE `JUGADORES` (
   `idjugadores` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` varchar(45) NOT NULL,
