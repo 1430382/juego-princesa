@@ -2,13 +2,13 @@ create table HISTORIAL(
 idhistorial int auto_increment primary key,
 descripcion varchar (100) not null,
 fecha date not null
-);
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `ROL` (
   `id_rol` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_rol`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `USUARIOS` (
   `idusuarios` int(11) NOT NULL AUTO_INCREMENT,
@@ -19,6 +19,7 @@ CREATE TABLE `USUARIOS` (
   foreign key (id_rol) references ROL (id_rol),
   UNIQUE KEY `idusuarios` (`idusuarios`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 insert into USUARIOS (usuario,contrasena,id_rol)values(1730042,"Rebeca",1);
 insert into USUARIOS (usuario,contrasena,id_rol)values(1730123,"Jose",2);
 
@@ -54,7 +55,7 @@ CREATE TABLE `JUGADORES` (
   PRIMARY KEY (`idjugadores`),
   UNIQUE KEY `idusuarios` (`idusuarios`),
   CONSTRAINT `JUGADORES_ibfk_1` FOREIGN KEY (`idusuarios`) REFERENCES `USUARIOS` (`idusuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `MISIONES` (
   `id` int(11) auto_increment,
@@ -74,7 +75,7 @@ idjugadores int,
 total int,
 primary key(idasistencia,idjugadores),
 foreign key (idjugadores) references JUGADORES (idjugadores)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 

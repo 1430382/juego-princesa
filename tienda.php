@@ -19,7 +19,13 @@ $idjugador=$_SESSION['idjugador'];
 //echo $idjugador;
 //$objeto='';
 $objeto = $_COOKIE['profile_viewer_uid'];
-
+//
+date_default_timezone_set("America/Monterrey");
+$fechactual=date('y-m-d');
+$fechactual=date('Y-m-d', strtotime($fechactual));
+$fechahechizo=date('Y-m-d', strtotime($fechactual. ' + 7 days'));
+//var_dump($fechahechizo);
+//
 ///// VALIDATE THE POST
 if(isset($_POST['users'])){
 	$users=$_POST['users'];
@@ -36,20 +42,21 @@ if(isset($_POST['registrar'])){
 		<strong>Exitoso!</strong> La compra se ha guardado correctamente.
 	</div>";
 	if (!($res=$con->query("
-	SELECT JUGADORES.matricula,JUGADORES.nombre,JUGADORES.apellidos,JUGADORES.equipo,
-	JUGADORES.genero,JUGADORES.vida,JUGADORES.fantasma,JUGADORES.idusuarios,
-	INVENTARIO_ITEMS.iditems,INVENTARIO_ITEMS.idjugadores, ITEMS.fecha FROM JUGADORES
-	INNER JOIN INVENTARIO_ITEMS
-	ON JUGADORES.idjugadores ='$idjugador'
-	INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems"))) {
+  SELECT JUGADORES.matricula,JUGADORES.nombre,JUGADORES.apellidos,JUGADORES.equipo,
+JUGADORES.genero,JUGADORES.vida,JUGADORES.fantasma,JUGADORES.idusuarios,
+INVENTARIO_ITEMS.iditems,INVENTARIO_ITEMS.idjugadores, ITEMS.fecha FROM JUGADORES
+INNER JOIN INVENTARIO_ITEMS
+ON JUGADORES.idjugadores='$idjugador'
+INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_ITEMS.idjugadores=JUGADORES.idjugadores"))) {
 		}else{
 			/*E imprimimos el resultado para ver que el ejemplo ha funcionado*/
 			if($row = $res->fetch_assoc()){
 				$_SESSION['iditems']=$row['iditems'];
 				$iditems=$_SESSION['iditems'];
+        //var_dump($iditems);
 				$_SESSION['equipo']=$row['equipo'];
         $equipo=$_SESSION['equipo'];
-
+        //var_dump($equipo);
 				if($row['iditems']==1)
 				{
 						if (!$con->query("UPDATE JUGADORES SET vida=vida-15  WHERE idjugadores='$idjugador'"))
@@ -113,6 +120,7 @@ if(isset($_POST['registrar'])){
 				else if($row['iditems']==7)
 				{
 			//veneno menor
+      $iditems=$row['iditems'];
 			if (!$con->query("UPDATE JUGADORES SET vida=vida-10  WHERE idjugadores='$idjugador'"))
 				{
 					echo"<div class='alert alert-success alert-dismissable'>
@@ -120,9 +128,13 @@ if(isset($_POST['registrar'])){
 					<strong>Exitoso!</strong> El objeto se a utilizado correctamente.
 				</div>";
 				}
+         $fechahechizo=date('Y-m-d', strtotime($fechactual. ' + 7 days'));
+        $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+        $query = mysqli_query($cox,"UPDATE ITEMS SET fecha='".$fechahechizo."' WHERE iditems='$iditems'");
 				}
 				else if($row['iditems']==8)
 				{
+          $iditems=$row['iditems'];
 					if (!$con->query("UPDATE JUGADORES SET vida=vida-10  WHERE equipo='$equipo'"))
 						{
 							echo"<div class='alert alert-success alert-dismissable'>
@@ -130,6 +142,10 @@ if(isset($_POST['registrar'])){
 							<strong>Exitoso!</strong> El objeto se a utilizado correctamente.
 						</div>";
 						}
+             $fechahechizo=date('Y-m-d', strtotime($fechactual. ' + 7 days'));
+            var_dump($fechahechizo);
+            $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $query = mysqli_query($cox,"UPDATE ITEMS SET fecha='".$fechahechizo."' WHERE iditems='$iditems'");
 				}
 
 			}else{

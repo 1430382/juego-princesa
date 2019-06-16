@@ -17,8 +17,6 @@ if($_SESSION['rol']==0){
 $usuario = $_SESSION['usuario'];
 //echo "<h2>".$usuario."</h2>";
 //var_dump($usuario);
-date_default_timezone_set("America/Monterrey");
-$fechactual=date('y-m-d');
 //echo "$fechactual";
 ////
 
