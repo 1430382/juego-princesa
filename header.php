@@ -17,7 +17,7 @@
 
     <ul class="nav navbar-nav mx-auto">
       <li class="nav-item">
-        <a class="nav-link" href="registrar.php">
+        <a class="nav-link" href="profile2.php">
         <img src="img/navbar/logo.png" alt="Logo de minecraft" class="navbar-logo center">
         <p id="texto-minecraft-logo">Análisis y diseño orientado a objetos</p>
         </a>

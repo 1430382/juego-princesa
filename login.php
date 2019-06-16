@@ -6,11 +6,53 @@
 	// Inicia la sesión, necesario para usar las utilidades de SESSION
 	session_start();
 	// Se incluye el archivo con la clase Database
-	include ("conexion.php");
+	include ("backend/conexion.php");
 	// Se crea una instancia de Database
-	$log = new Database();
+//
+if(isset($_GET['status'])){
+	$status = $_GET['status'];
+	if($status == 1){
+		echo "<script>
+		$(function(){
+			Materialize.toast('El usuario o contraseña es incorrecto', 2200, 'rounded')
+		});
+	</script>";
+}else if($status == 2){
+		echo "<script>
+		$(function(){
+			Materialize.toast('Ha ocurrido un error, intente nuevamente', 2200, 'rounded')
+		});
+	</script>";
+}
+}
+//
+  if (isset($_POST['submit_ver'])) {
+    // Se asigna a sus respectivas variables
+  	$username = htmlspecialchars($_POST['username']);
+  	$password = htmlspecialchars($_POST['password']);
+    // Luego se llama el procedimiento almacenado
+  	if (!($res=$con->query("CALL iniciar_sesion('$username','$password')"))) {
+  		header("location: login.php?status=2");
+  	}else{
+  		/*E imprimimos el resultado para ver que el ejemplo ha funcionado*/
+  		if($row = $res->fetch_assoc()){
+        //Se guarda el rol y el id del id_usuario
+        // Para utilizarlo posteriormente
+  			$_SESSION['rol']=$row['id_rol'];
+  			$_SESSION['usuario']=$row['idusuarios'];        
+  		if($row['id_rol']==1){
+          //var_dump($_SESSION['usuario']);
+          //var_dump($_SESSION['rol']);
+  				header("location: registrar.php");
+  			}
+        if($row['id_rol']==2){
+    				header("location: profile2.php");
+    			}
+  		}else{
 
-
+  		}
+  	}
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,7 +73,7 @@
 <body style="background-image: url(img/bg_login.jpg);">
 <main>
   <?php
-
+        /*
 				// Se revisa que se enviaron datos mediante el método POST
 				if(isset($_POST) && !empty($_POST)){
 					// Se guardan en variables los valores del metodo post
@@ -46,6 +88,7 @@
 							// Se guardan los valores enviados en variables de SESSION
 							$_SESSION['nombre'] = $nombre;
 							$_SESSION['pass'] = $pass;
+              $_SESSION['id_rol']=$rol;
 							// Y redirecciona a index
 							header('Location: registrar.php');
 						}
@@ -64,17 +107,17 @@
 
 
           ///
-				}
+				}*/
 			?>
 	<div class="col-sm-8 loginForm">
 		<img class="navbar-logo center" style="margin-bottom: 2em;" src="img/navbar/logo.png">
 		<form method="post" action="" name="login">
-			<input class="formInput center" type="text" id="nombre" name="nombre" placeholder="usuario">
+			<input class="formInput center" type="text" id="username" name="username" placeholder="usuario">
 			<br>
-			<input class="formInput center" type="password" id="pass" name="pass" placeholder="Password">
+			<input class="formInput center" type="password" id="password" name="password" placeholder="Password">
 			<br>
 			<div class="container-login100-form-btn">
-		<button type="submit" name="submit" style="margin-left:500px;width:200px">Ingresar</button>
+		<button type="submit" name="submit_ver" style="margin-left:500px;width:200px">Ingresar</button>
 		</div>
 		</form>
 		</main>

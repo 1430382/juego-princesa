@@ -1,11 +1,26 @@
+create table HISTORIAL(
+idhistorial int auto_increment primary key,
+descripcion varchar (100) not null,
+fecha date not null
+);
+
+CREATE TABLE `ROL` (
+  `id_rol` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id_rol`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 CREATE TABLE `USUARIOS` (
   `idusuarios` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` int(11) NOT NULL,
   `contrasena` varchar(50) NOT NULL,
-  PRIMARY KEY (`idusuarios`),
+  `id_rol` int,
+  PRIMARY KEY (`idusuarios`,`id_rol`),
+  foreign key (id_rol) references ROL (id_rol),
   UNIQUE KEY `idusuarios` (`idusuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-insert into USUARIOS values(1730042,"Rebeca");
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+insert into USUARIOS (usuario,contrasena,id_rol)values(1730042,"Rebeca",1);
+insert into USUARIOS (usuario,contrasena,id_rol)values(1730123,"Jose",2);
 
   CREATE TABLE `ITEMS` (
     `iditems` int(11) NOT NULL AUTO_INCREMENT,
@@ -151,4 +166,11 @@ ON J.idjugadores = INV.idjugadores
 INNER JOIN ITEMS I ON I.iditems = INV.iditems SET J.vida=J.vida-1
 WHERE J.equipo !=_NUMERO_DE_EQUIPO AND I.fecha !=fechactual;
   END$$
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE historial_ins(_descripcion varchar(100),fechactual date)
+  BEGIN
+  insert into HISTORIAL (descripcion,fecha) values(_descripcion,fechactual);
+  END //
 DELIMITER ;

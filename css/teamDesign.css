@@ -1,0 +1,250 @@
+  html,body{
+    height: 100%;
+    font-family: Minecraftia;
+    }
+
+
+    /*Diseño para la letras de minecraft*/
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      th {
+        font-weight: 100;
+      }
+      
+      th {
+        font-size: 22px;
+      }
+      
+      .black {
+        color: #000000;
+      }
+      
+      .black.shadow {
+        text-shadow: 3px 3px #000000;
+      }
+      
+      .dark_blue {
+        color: #0000AA;
+      }
+      
+      .dark_blue.shadow {
+        text-shadow: 3px 3px #00002A;
+      }
+      
+      .dark_green {
+        color: #00AA00;
+      }
+      
+      .dark_green.shadow {
+        text-shadow: 3px 3px #002A00;
+      }
+      
+      .dark_aqua {
+        color: #00AAAA;
+      }
+      
+      .dark_aqua.shadow {
+        text-shadow: 3px 3px #002A2A;
+      }
+      
+      .dark_red {
+        color: #AA0000;
+      }
+      
+      .dark_red.shadow {
+        text-shadow: 3px 3px #2A0000;
+      }
+      
+      .dark_purple {
+        color: #AA00AA;
+      }
+      
+      .dark_purple.shadow {
+        text-shadow: 3px 3px #2A002A;
+      }
+      
+      .gold {
+        color: #FFAA00;
+      }
+      
+      .gold.shadow {
+        text-shadow: 3px 3px #2A2A00;
+      }
+      
+      .gray {
+        color: #AAAAAA;
+      }
+      
+      .gray.shadow {
+        text-shadow: 3px 3px #2A2A2A;
+      }
+      
+      .dark_gray {
+        color: #555555;
+      }
+      
+      .dark_gray.shadow {
+        text-shadow: 3px 3px #151515;
+      }
+      
+      .blue {
+        color: #5555FF;
+      }
+      
+      .blue.shadow {
+        text-shadow: 3px 3px #15153F;
+      }
+      
+      .green {
+        color: #55FF55;
+      }
+      
+      .green.shadow {
+        text-shadow: 3px 3px #153F15;
+      }
+      
+      .aqua {
+        color: #55FFFF;
+      }
+      
+      .aqua.shadow {
+        text-shadow: 3px 3px #153F3F;
+      }
+      
+      .red {
+        color: #FF5555;
+      }
+      
+      .red.shadow {
+        text-shadow: 3px 3px #3F1515;
+      }
+      
+      .light_purple {
+        color: #FF55FF;
+      }
+      
+      .light_purple.shadow {
+        text-shadow: 3px 3px #3F153F;
+      }
+      
+      .yellow {
+        color: #FFFF55;
+      }
+      
+      .yellow.shadow {
+        text-shadow: 3px 3px #3F3F15;
+      }
+      
+      .white {
+        color: #FFFFFF;
+      }
+      
+      .white.shadow {
+        text-shadow: 3px 3px #3F3F3F;
+      }
+      
+      .bold {
+        font-weight: bold;
+      }
+      
+      .strikethrough {
+        text-decoration: line-through;
+      }
+      
+      .underline {
+        text-decoration: underline;
+      }
+      
+      .italic {
+        font-style: italic;
+      }  
+
+      
+.bordes{
+    border-width: 5px;
+    border-color: rgb(204, 204, 204);
+}
+      
+.header{
+    text-align: center;
+    background-color: rgb(199, 199, 199);
+}
+
+.foot{
+    text-align: center;
+    background-color: rgb(199, 199, 199);
+}
+
+.body{
+    font-size: 14px;
+    text-align: left;
+}
+
+.userIcon {
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(255, 255, 255);
+}
+
+
+/*Diseño del boton*/
+.boton {
+    font-size: 18px;
+    width: 300px;
+    height: 40px;
+    background-image: url('http://charliecowan.co.uk/mcbuttongenerator/button_active_center.png');    
+    }
+
+/*Diseño del scroll*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.contenedor {
+	width: 500px;
+	height: 550px;
+	background: #fff;
+	overflow: auto;
+	border-radius: 4px;
+}
+
+/* Scroll Personalizado */
+
+.contenedor::-webkit-scrollbar {
+	width: 12px;
+}
+
+.contenedor::-webkit-scrollbar-thumb {
+	background: #ff9d00;
+	border-radius: 5px;
+}
+
+
+/*Posiciones de objetos*/
+
+.logPos{
+position: absolute;
+  margin-top: 10px;
+
+
+}
+
+.textLog{
+  size: 12px;
+}
+
+.inmovil{
+  position: absolute;
+  margin-left: 100px;
+}
+
+.fechaDesign{
+  font-size: 10px;
+}

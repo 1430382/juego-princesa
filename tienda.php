@@ -1,6 +1,6 @@
 <?php
 // Permite mostrar los errores
-	error_reporting(E_ALL);
+error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 // Inicia la sesión, necesario para usar las utilidades de SESSION
@@ -8,21 +8,20 @@ session_start();
 // Se incluye el archivo con la clase Database
 include ("backend/conexion.php");
 /////////
-
 ///
-$idjugador=$_SESSION['_idjugador'];
+$idjugador=$_SESSION['idjugador'];
 //echo $idjugador;
 //$objeto='';
+$objeto = $_COOKIE['profile_viewer_uid'];
+
 ///// VALIDATE THE POST
-if(isset($_POST['objeto'])){
- 	 $objeto=$_POST['objeto'];
-}
 if(isset($_POST['users'])){
 	$users=$_POST['users'];
 }
 ////////
 if(isset($_POST['registrar'])){
-	 $query = "INSERT INTO INVENTARIO_ITEMS (idjugadores,iditems) VALUES ('".$users."','".$objeto."')";
+	//echo($objeto);
+	 $query = "INSERT INTO INVENTARIO_ITEMS (idjugadores,iditems) VALUES ('".$idjugador."','".$objeto."')";
 
 	 if($con ->query($query)== TRUE)
 	 {
@@ -126,12 +125,6 @@ if(isset($_POST['registrar'])){
 						</div>";
 						}
 				}
-				else if($row['iditems']==9)
-				{
-					echo '<script language="javascript">';
-					echo 'alert("El de tortura simple no funciona.")';
-					echo '</script>';
-				}
 
 			}else{
 				echo "No existen más items";
@@ -154,6 +147,329 @@ $con->close();
 }
  ?>
 
+ <script type="text/javascript">
+ function agregaform(itemid){
+
+ if(itemid == 1){
+   var nameitem = "Muerte prematura";
+   document.cookie="profile_viewer_uid=1";
+	 //window.location.href="tienda.php?uid=1";
+
+ }
+ if(itemid == 2){
+   var nameitem = "Lagrimas de amigos";
+   document.cookie="profile_viewer_uid=2";
+	 //window.location.href="tienda.php?uid=2";
+ }
+ if(itemid == 3){
+   var nameitem = "Reloj de arena";
+   document.cookie="profile_viewer_uid=3";
+	 //window.location.href="tienda.php?uid=3";
+ }
+ if(itemid == 4){
+   var nameitem = "Clon de sombra";
+   document.cookie="profile_viewer_uid=4";
+	 //window.location.href="tienda.php?uid=4";
+ }
+ if(itemid == 5){
+   var nameitem = "Teletransportación menor";
+   document.cookie="profile_viewer_uid=5";
+	 //window.location.href="tienda.php?uid=5";
+ }
+ if(itemid == 6){
+   var nameitem = "Teletransportación mayor";
+   document.cookie="profile_viewer_uid=6";
+	 //window.location.href="tienda.php?uid=6";
+ }
+ if(itemid == 7){
+   var nameitem = "Veneno menor";
+   document.cookie="profile_viewer_uid=7";
+	 //window.location.href="tienda.php?uid=7";
+ }
+ if(itemid == 8){
+   var nameitem = "Veneno medio";
+   document.cookie="profile_viewer_uid=8";
+	 //window.location.href="tienda.php?uid=8";
+ }
+ if(itemid == 9){
+   var nameitem = "Tortura simple";
+   document.cookie="profile_viewer_uid=9";
+	 //window.location.href="tienda.php?uid=9";
+ }
+
+ if(itemid <= 6)
+ document.getElementById("title").innerHTML="Comprar item "+ nameitem;
+
+ document.getElementById("nombreu").value= nameitem;
+ if(itemid > 6)
+ document.getElementById("title").innerHTML="Comprar maldición "+nameitem;
+
+ document.getElementById("nombreu").value=nameitem;
+ }
+
+
+ //Muerte prematura
+ 	function item1(){
+ 		var nameitem = "Muerte prematura";
+ 		var item = document.getElementById("item1");
+     	if(item.style.display == "none"){
+ 			document.getElementById("item1").style.display = "block";
+ 			document.getElementById("a").style.display = "block";
+ 			document.getElementById("item2").style.display="none";
+ 			document.getElementById("b").style.display = "none";
+ 			document.getElementById("item3").style.display="none";
+ 			document.getElementById("c").style.display = "none";
+ 			document.getElementById("item4").style.display="none";
+ 			document.getElementById("d").style.display = "none";
+ 			document.getElementById("item5").style.display="none";
+ 			document.getElementById("e").style.display = "none";
+ 			document.getElementById("item6").style.display="none";
+ 			document.getElementById("f").style.display = "none";
+ 			document.getElementById("item7").style.display="none";
+ 			document.getElementById("g").style.display = "none";
+ 			document.getElementById("item8").style.display="none";
+ 			document.getElementById("h").style.display = "none";
+ 			document.getElementById("item9").style.display="none";
+ 			document.getElementById("i").style.display = "none";
+     	}else{
+       		document.getElementById("item1").style.display = "none";
+ 			document.getElementById("a").style.display = "none";
+ 		}
+ 	}
+
+ 	//Lagrima de amigos
+ 	function item2(){
+ 		var nameitem = "Lagrimas de amigos";
+ 		var item=document.getElementById("item2");
+ 		if(item.style.display=="none"){
+ 			document.getElementById("item1").style.display = "none";
+ 			document.getElementById("a").style.display = "none";
+ 			document.getElementById("item2").style.display="block";
+ 			document.getElementById("b").style.display = "block";
+ 			document.getElementById("item3").style.display="none";
+ 			document.getElementById("c").style.display = "none";
+ 			document.getElementById("item4").style.display="none";
+ 			document.getElementById("d").style.display = "none";
+ 			document.getElementById("item5").style.display="none";
+ 			document.getElementById("e").style.display = "none";
+ 			document.getElementById("item6").style.display="none";
+ 			document.getElementById("f").style.display = "none";
+ 			document.getElementById("item7").style.display="none";
+ 			document.getElementById("g").style.display = "none";
+ 			document.getElementById("item8").style.display="none";
+ 			document.getElementById("h").style.display = "none";
+ 			document.getElementById("item9").style.display="none";
+ 			document.getElementById("i").style.display = "none";
+ 		}else{
+ 			document.getElementById("item2").style.display="none";
+ 			document.getElementById("b").style.display="none";
+ 		}
+ 	}
+
+ 	//Reloj de arena
+ 	function item3(){
+ 		var nameitem = "Reloj de arena";
+ 		var item=document.getElementById("item3");
+ 		if(item.style.display=="none"){
+ 			document.getElementById("item1").style.display = "none";
+ 			document.getElementById("a").style.display = "none";
+ 			document.getElementById("item2").style.display="none";
+ 			document.getElementById("b").style.display = "none";
+ 			document.getElementById("item3").style.display="block";
+ 			document.getElementById("c").style.display = "block";
+ 			document.getElementById("item4").style.display="none";
+ 			document.getElementById("d").style.display = "none";
+ 			document.getElementById("item5").style.display="none";
+ 			document.getElementById("e").style.display = "none";
+ 			document.getElementById("item6").style.display="none";
+ 			document.getElementById("f").style.display = "none";
+ 			document.getElementById("item7").style.display="none";
+ 			document.getElementById("g").style.display = "none";
+ 			document.getElementById("item8").style.display="none";
+ 			document.getElementById("h").style.display = "none";
+ 			document.getElementById("item9").style.display="none";
+ 			document.getElementById("i").style.display = "none";
+ 		}else{
+ 			document.getElementById("item3").style.display="none";
+ 			document.getElementById("c").style.display="none";
+ 		}
+ 	}
+
+ 	//Clon de sombra
+ 	function item4(){
+ 		var nameitem = "Clon de sombra";
+ 		var item=document.getElementById("item4");
+ 		if(item.style.display=="none"){
+ 			document.getElementById("item1").style.display = "none";
+ 			document.getElementById("a").style.display = "none";
+ 			document.getElementById("item2").style.display="none";
+ 			document.getElementById("b").style.display = "none";
+ 			document.getElementById("item3").style.display="none";
+ 			document.getElementById("c").style.display = "none";
+ 			document.getElementById("item4").style.display="block";
+ 			document.getElementById("d").style.display = "block";
+ 			document.getElementById("item5").style.display="none";
+ 			document.getElementById("e").style.display = "none";
+ 			document.getElementById("item6").style.display="none";
+ 			document.getElementById("f").style.display = "none";
+ 			document.getElementById("item7").style.display="none";
+ 			document.getElementById("g").style.display = "none";
+ 			document.getElementById("item8").style.display="none";
+ 			document.getElementById("h").style.display = "none";
+ 			document.getElementById("item9").style.display="none";
+ 			document.getElementById("i").style.display = "none";
+ 		}else{
+ 			document.getElementById("item4").style.display="none";
+ 			document.getElementById("d").style.display="none";
+ 		}
+ 	}
+
+ 	function item5(){
+ 		var nameitem = "Teletransportación menor";
+ 		var item=document.getElementById("item5");
+ 		if(item.style.display=="none"){
+ 			document.getElementById("item1").style.display = "none";
+ 			document.getElementById("a").style.display = "none";
+ 			document.getElementById("item2").style.display="none";
+ 			document.getElementById("b").style.display = "none";
+ 			document.getElementById("item3").style.display="none";
+ 			document.getElementById("c").style.display = "none";
+ 			document.getElementById("item4").style.display="none";
+ 			document.getElementById("d").style.display = "none";
+ 			document.getElementById("item5").style.display="block";
+ 			document.getElementById("e").style.display = "block";
+ 			document.getElementById("item6").style.display="none";
+ 			document.getElementById("f").style.display = "none";
+ 			document.getElementById("item7").style.display="none";
+ 			document.getElementById("g").style.display = "none";
+ 			document.getElementById("item8").style.display="none";
+ 			document.getElementById("h").style.display = "none";
+ 			document.getElementById("item9").style.display="none";
+ 			document.getElementById("i").style.display = "none";
+ 		}else{
+ 			document.getElementById("item5").style.display="none";
+ 			document.getElementById("e").style.display="none";
+ 		}
+ 	}
+
+ 	function item6(){
+ 		var nameitem = "Teletransportación mayor";
+ 		var item=document.getElementById("item6");
+ 		if(item.style.display=="none"){
+ 			document.getElementById("item1").style.display = "none";
+ 			document.getElementById("a").style.display = "none";
+ 			document.getElementById("item2").style.display="none";
+ 			document.getElementById("b").style.display = "none";
+ 			document.getElementById("item3").style.display="none";
+ 			document.getElementById("c").style.display = "none";
+ 			document.getElementById("item4").style.display="none";
+ 			document.getElementById("d").style.display = "none";
+ 			document.getElementById("item5").style.display="none";
+ 			document.getElementById("e").style.display = "none";
+ 			document.getElementById("item6").style.display="block";
+ 			document.getElementById("f").style.display = "block";
+ 			document.getElementById("item7").style.display="none";
+ 			document.getElementById("g").style.display = "none";
+ 			document.getElementById("item8").style.display="none";
+ 			document.getElementById("h").style.display = "none";
+ 			document.getElementById("item9").style.display="none";
+ 			document.getElementById("i").style.display = "none";
+ 		}else{
+ 			document.getElementById("item6").style.display="none";
+ 			document.getElementById("f").style.display="none";
+ 		}
+ 	}
+
+ 	function item7(){
+ 		var nameitem = "Veneno menor";
+ 		var item=document.getElementById("item7");
+ 		if(item.style.display=="none"){
+ 			document.getElementById("item1").style.display = "none";
+ 			document.getElementById("a").style.display = "none";
+ 			document.getElementById("item2").style.display="none";
+ 			document.getElementById("b").style.display = "none";
+ 			document.getElementById("item3").style.display="none";
+ 			document.getElementById("c").style.display = "noe";
+ 			document.getElementById("item4").style.display="none";
+ 			document.getElementById("d").style.display = "none";
+ 			document.getElementById("item5").style.display="none";
+ 			document.getElementById("e").style.display = "none";
+ 			document.getElementById("item6").style.display="none";
+ 			document.getElementById("f").style.display = "none";
+ 			document.getElementById("item7").style.display="block";
+ 			document.getElementById("g").style.display = "block";
+ 			document.getElementById("item8").style.display="none";
+ 			document.getElementById("h").style.display = "none";
+ 			document.getElementById("item9").style.display="none";
+ 			document.getElementById("i").style.display = "none";
+ 		}else{
+ 			document.getElementById("item7").style.display="none";
+ 			document.getElementById("g").style.display="none";
+ 		}
+ 	}
+
+ 	function item8(){
+ 		var nameitem = "Veneno medio";
+ 		var item=document.getElementById("item8");
+ 		if(item.style.display=="none"){
+ 			document.getElementById("item1").style.display = "none";
+ 			document.getElementById("a").style.display = "none";
+ 			document.getElementById("item2").style.display="none";
+ 			document.getElementById("b").style.display = "none";
+ 			document.getElementById("item3").style.display="none";
+ 			document.getElementById("c").style.display = "none";
+ 			document.getElementById("item4").style.display="none";
+ 			document.getElementById("d").style.display = "none";
+ 			document.getElementById("item5").style.display="none";
+ 			document.getElementById("e").style.display = "none";
+ 			document.getElementById("item6").style.display="none";
+ 			document.getElementById("f").style.display = "none";
+ 			document.getElementById("item7").style.display="none";
+ 			document.getElementById("g").style.display = "none";
+ 			document.getElementById("item8").style.display="block";
+ 			document.getElementById("h").style.display = "block";
+ 			document.getElementById("item9").style.display="none";
+ 			document.getElementById("i").style.display = "none";
+ 		}else{
+ 			document.getElementById("item8").style.display="none";
+ 			document.getElementById("h").style.display="none";
+ 		}
+ 	}
+
+ 	function item9(){
+ 		var nameitem = "Tortura simple";
+ 		var item=document.getElementById("item9");
+ 		if(item.style.display=="none"){
+ 			document.getElementById("item1").style.display = "none";
+ 			document.getElementById("a").style.display = "none";
+ 			document.getElementById("item2").style.display="none";
+ 			document.getElementById("b").style.display = "none";
+ 			document.getElementById("item3").style.display="none";
+ 			document.getElementById("c").style.display = "none";
+ 			document.getElementById("item4").style.display="none";
+ 			document.getElementById("d").style.display = "none";
+ 			document.getElementById("item5").style.display="none";
+ 			document.getElementById("e").style.display = "none";
+ 			document.getElementById("item6").style.display="none";
+ 			document.getElementById("f").style.display = "none";
+ 			document.getElementById("item7").style.display="none";
+ 			document.getElementById("g").style.display = "none";
+ 			document.getElementById("item8").style.display="none";
+ 			document.getElementById("h").style.display = "none";
+ 			document.getElementById("item9").style.display="block";
+ 			document.getElementById("i").style.display = "block";
+ 		}else{
+ 			document.getElementById("item9").style.display="none";
+ 			document.getElementById("i").style.display="none";
+ 		}
+ 	}
+
+ 	function name_item(){
+ 		return nameitem;
+ 	  }
+
+ </script>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -163,13 +479,22 @@ $con->close();
 
 	<!-- MINECRAFT FONT -->
 	<link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+	    <link rel="stylesheet" text="text/css" href="css/fontMinecraft.css">
+			<!-- Bootstrap CSS -->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css">
 
-		<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href='css/tienda.css'>
+		<!--Declaracion para el diseño de scrollbar-->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
 
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/tienda.css">
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+
+	<!--Carrousel-->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 	<title>Tienda</title>
 </head>
@@ -216,172 +541,119 @@ label {
 						<img src="img/tienda/welcomeTienda.gif" id="mensaje">
 						<img src="img/tienda/aldeano.png" id="aldeano">
 					</div>
-					<div class="col-sm-12 center" id="tabla" style="float:left;margin-left:550px;margin-top:-290px;display:inline-block;">
+
 					<div class="col-sm-3">
-				<!--		<img src="img/tienda/button.png" class="center" id="boton"> -->
-						<img src="img/tienda/items/tear.png" width="100px" height="100px" id="image2" style="float:left;margin-left:-550px;margin-top:150px;display:none;" alt="image2"/>
-						 <label for="image2" style="color:#DC143C;float:left;margin-left:-400px;margin-top:150px;display:none;font-size:20px;"
-						 id="label2" alt="label2">15 ps *integrante El jugador obtiene +5 cuando esta en status fantasma </label>
-						 <!-- --->
-						<img src="img/tienda/items/muertePrematura.png" width="100px" height="100px" id="image1" style="float:left;margin-left:-550px;margin-top:150px;display:none;" alt="image1">
-						<label for="image1" style="color:#DC143C;float:left;margin-left:-400px;margin-top:150px;display:none;font-size:20px;"
-						id="label1" alt="label1">15 ps El jugador obtiene +1 cuando esta en status fantasma </label>
-						<!-- --->
-					 <img src="img/tienda/items/mayor.png" width="100px" height="100px" id="image3"  alt="image3" style="float:left;margin-left:-550px;margin-top:150px;display:none;">
-					 <label for="image3" style="color:#DC143C;float:left;margin-left:-400px;margin-top:150px;display:none;font-size:20px;"
-					 id="label3" alt="label3">20 ps 3 inicial y -1 ps diario por una semana a todos los jugadores, a los miembros del equipo del lanzador </label>
 
-					<!-- --->
-				 <img src="img/tienda/items/menor.png" width="100px" height="100px" id="image4"  alt="image4" style="float:left;margin-left:-550px;margin-top:150px;display:none;">
-				 <label for="image4" style="color:#DC143C;float:left;margin-left:-400px;margin-top:150px;display:none;font-size:20px;"
-				 id="label4" alt="label4">15 ps 3 inicial y -1 ps diario por una semana a todos los jugadores, a los miembros del equipo del lanzador </label>
+						<div class="col-2  Vista">
+			<?php
+					include_once "connect.php";
+					$sentencia = "SELECT * FROM ITEMS";
+			   foreach ($base_de_datos ->query($sentencia) as $row ) {
+			    	$id = $row['iditems'];
+			    	$img = $row['thumb'];
 
-				<!-- --->
-				 <img src="img/tienda/items/clonSombra.jpg" width="100px" height="100px" id="image5"  alt="image5" style="float:left;margin-left:-550px;margin-top:150px;display:none;">
-				 <label for="image5" style="color:#DC143C;float:left;margin-left:-400px;margin-top:150px;display:none;font-size:20px;"
-				 id="label5" alt="label5">7 ps 3 Permite borrar el registro de una falta </label>
-			 <!-- --->
-				<img src="img/tienda/items/muerte.png" width="100px" height="100px" id="image6"  alt="image6" style="float:left;margin-left:-550px;margin-top:150px;display:none;">
-				<label for="image6" style="color:#DC143C;float:left;margin-left:-400px;margin-top:150px;display:none;font-size:20px;"
-				id="label6" alt="label6">5 ps Asigna un hechizo aleatorio a un jugador objetivo </label>
-			<!-- --->
-			 <img src="img/tienda/items/sandclock.png" width="100px" height="100px" id="image7"  alt="image7" style="float:left;margin-left:-550px;margin-top:150px;display:none;">
-			 <label for="image7" style="color:#DC143C;float:left;margin-left:-400px;margin-top:150px;display:none;font-size:20px;"
-			 id="label7" alt="label7">5 ps Permite aumentar el tiempo de efecto del hechizo para el jugador </label>
-		 	<!-- --->
-		 	 <img src="img/tienda/items/teleport.png" width="100px" height="100px" id="image8"  alt="image8" style="float:left;margin-left:-550px;margin-top:150px;display:none;">
-		 	 <label for="image8" style="color:#DC143C;float:left;margin-left:-400px;margin-top:150px;display:none;font-size:20px;"
-		 	 id="label8" alt="label8">7 ps Permite intercambiar el objetivo de un hechizo inmediato </label>
-			 <!-- --->
- 		 	 <img src="img/tienda/items/teleport.png" width="100px" height="100px" id="image9"  alt="image9" style="float:left;margin-left:-550px;margin-top:150px;display:none;">
- 		 	 <label for="image9" style="color:#DC143C;float:left;margin-left:-400px;margin-top:150px;display:none;font-size:20px;"
- 		 	 id="label9" alt="label9">10 * integrante Permite intercambiar todo el equipo objetivo de un hechizo </label>
-				</div>
-			</div>
+			    	echo "<p class='text-justify' id='item$id' style='display: none;'' ><img src='img/tienda/items/".$img."' style='margin-top:100px; width='100' eight='100'></p>";
+						//echo '<img src="img/tienda/items/'.$img .'" style= "float:left;margin-left:200px;margin-top:20px;" width = "100">';
+			   }
 
-			<div class="col-sm-6" >
-				<div class="row center" >
-
-
-						<div class="row">
-<!--  style= "width: 500px; height: 500px; float:left;margin-left:200px;margin-top:61px;
----->
-<div class="col-sm-12">
-<img src="img/tienda/items/muertePrematura.png" alt="" width="50" style="float:left;margin-left:980px;margin-top:-640px;">
-<img src="img/tienda/items/tear.png" alt="" width="50" style="float:left;margin-left:980px;margin-top:-590px;">
-<img src="img/tienda/items/mayor.png" alt="" width="50" style="float:left;margin-left:980px;margin-top:-540px;">
-<img src="img/tienda/items/menor.png" alt="" width="50" style="float:left;margin-left:980px;margin-top:-490px;">
-<img src="img/tienda/items/clonSombra.jpg" alt="" width="50" style="float:left;margin-left:980px;margin-top:-440px;">
-<img src="img/tienda/items/muerte.png" alt="" width="50" style="float:left;margin-left:980px;margin-top:-390px;">
-<img src="img/tienda/items/sandclock.png" alt="" width="50" style="float:left;margin-left:980px;margin-top:-340px;">
-<img src="img/tienda/items/teleport.png" alt="" width="50" style="float:left;margin-left:980px;margin-top:-290px;">
-<img src="img/tienda/items/teleport.png" alt="" width="50" style="float:left;margin-left:980px;margin-top:-240px;">
-</div>
-
-<form class="center" id="form-margins" method="post">
-
-											<div class="form-check" style="margin-left: 45.25em;margin-top: -670px;">
-
-												<input  class="form-check-input"  type="radio" name="objeto" id="objeto" value="1">
-												<label class="form-check-label" for="muertePrematura">
-													Muerte Prematura
-												</label>
-											</div>
-													<div class="form-check" style="margin-left: 45.25em;margin-top: 30px;">
-												<input  class="form-check-input" type="radio" name="objeto" id="objeto" value="2">
-												<label class="form-check-label" for="lagrimas">
-													Lagrimas de amigos
-												</label>
-											</div>
-											<br>
-											<div class="form-check" style="margin-left: 45.25em;margin-top: 10px;">
-
-												<input  class="form-check-input" type="radio" name="objeto" id="objeto" value="8">
-												<label class="form-check-label" for="veneno">
-													Veneno mayor
-												</label>
-
-											</div>
-											<div class="form-check" style="margin-left: 45.25em;margin-top: 30px;">
-
-												<input  class="form-check-input" type="radio" name="objeto" id="objeto" value="7">
-												<label class="form-check-label" for="venenomen">
-													Veneno menor
-												</label>
-
-											</div>
-
-											<div class="form-check" style="margin-left: 45.25em;margin-top: 20px;">
-
-												<input  class="form-check-input" type="radio" name="objeto" id="objeto" value="4">
-												<label class="form-check-label" for="clon">
-													Clon de sombras
-												</label>
-
-											</div>
-											<div class="form-check" style="margin-left: 45.25em;margin-top: 20px;">
-
-												<input  class="form-check-input" type="radio" name="objeto" id="objeto" value="9">
-												<label class="form-check-label" for="tortura">
-													Tortura simple
-												</label>
-
-											</div>
-													<div class="form-check" style="margin-left: 45.25em;margin-top: 20px;">
-
-												<input  class="form-check-input" type="radio" name="objeto" id="objeto" value="3">
-												<label class="form-check-label" for="relojdearena">
-													Reloj de arena
-												</label>
-
-											</div>
-											<div class="form-check" style="margin-left: 45.25em;margin-top: 20px;">
-
-												<input  class="form-check-input" type="radio" name="objeto" id="objeto" value="5">
-												<label class="form-check-label" for="teletransportacionmenor">
-													teletransportacion menor
-												</label>
-
-											</div>
-											<div class="form-check" style="margin-left: 45.25em;margin-top: 30px;">
-
-												<input  class="form-check-input" type="radio" name="objeto" id="objeto" value="6">
-												<label class="form-check-label" for="teletransportacionmayor">
-													Teletransportacion mayor
-												</label>
-
-											</div>
-
-
-								<select name="users" id="users" style="margin-left: 45.25em;margin-top: 20px;">
-							<?php
-					 			$res="select idjugadores,CONCAT(nombre,' ',apellidos,' ') as JUGADORES FROM JUGADORES;";
-					 			$res=$con->query($res);
-					 			while ($row = $res->fetch_array()) {
-					 				?>
-					 				<option value="<?php echo $row['idjugadores'];?>">
-					 				<?php echo $row['JUGADORES'];?>
-					 				</option>
-					 				<?php
-					 			}
-					 		?>
-</select>
-<!--
---->
-<br>
-						<button class="button button1" type="submit" name="registrar" style= "float:left;margin-left:700px;margin-top:-150px;" >Comprar</button>
-						</form>
-						</div>
+			   ?>
 					</div>
-				</div>
+					<?php
+					$sentencia = "SELECT * FROM ITEMS";
+					$cont = 'a';
+			   foreach ($base_de_datos ->query($sentencia) as $row ) {
+					$id = $row['iditems'];
+					$name = $row['nombre'];
+					$img = $row['thumb'];
+			//		$desc = $row['descripcion'];
+
+
+			    	echo "<div class='informacion' id='$cont' style='display: none;'>
+					<div class='centrar yellow'>$name</div>
+					</div>";
+				$cont++;
+			   }
+
+			   ?>
+
 			</div>
 		</div>
 	</div>
 
+	<!--Información del equipo-->
+	 <div class="card bordes" style="max-width: 32rem;">
+		<!--Nombre del equipo-->
+		<div class="card-header border-dark header gold shadow "><h5>LISTA DE OBJETOS</h5></div>
+		<!--Cuerpo-->
+		<div class="card-body text-success bg-dark body contenedor">
+	<?php
+	$cont = 'a';
+	$sentencia = "SELECT * FROM ITEMS";
+	   foreach ($base_de_datos ->query($sentencia) as $row ) {
+			$id = $row['iditems'];
+			$_SESSION['id']=$id;
+			$name = $row['nombre'];
+			$img = $row['thumb'];
+		//	$desc = $row['descripcion'];
+			$tipo = $row['categoria'];
+			$precio = $row['precio'];
+				echo "<!--OBJETOS-->
+			<div class='row mt-1'>";
+			echo "<!--Precio del objeto-->
+				<div class='col precio'>
+					<img src='img/teams/hp.png' width='30' class='espPrecio'> <!--Prueba de boton-->
+					<button onclick='item$id($cont);agregaform($id)' class='ml-4 noview white'><h5 class='tam mt-1'>$precio PS</h5></button>
+				</div>
+				<div class='col-9 barra'>
+					<div class='row mt-2'>
+					       <div class='col-2 mt-1'>
+					           <!--Icono del objeto-->
+					           <img src=img/tienda/items/$img class='' width='40'>
+				           </div>
+					       <div class='col-9 yellow'>
+					            <!--Nombre del objeto-->
+					            $name
+					            <br>
+				             	<!--Tipo de objeto-->
+					            $tipo
+				                </div>
+			               </div><!--Fin de la fila de la barra-->
+				</div><!--Fin de la barra del objeto-->
+			</div> <!--Fin del OBJETO 1-->";
+	   }
 
+	?>
+
+
+	</div>
+	<div class="card-footer border-success foot">
+	<button type="button" class="boton white" data-toggle='modal'  data-target='#exampleModal'>COMPRAR</button></div>
+	</div> <!--Fin de la lista de OBJETOS-->
 <!--
 
------->
+------><!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <input type="text" name="item" id="nombreu" class="form-control input-sm" >
+      </div>
+      <div class="modal-footer">
+				<form class="" method="post">
+						<button type='submit' name="registrar" id="registrar"  class='btn btn-primary'>Buy</button>
+				</form>
+	  </div>
+	  </form>
+    </div>
+  </div>
+</div>
+
 
 
 
@@ -395,6 +667,7 @@ label {
 </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.3/jquery.min.js"></script>
+<!--
 <script type="text/javascript">
 $("input:radio[type=radio]").click(function() {
   var value = $(this).val();
@@ -592,3 +865,4 @@ $("input:radio[type=radio]").click(function() {
   $('#showoption').html(value);
 });
 </script>
+-->

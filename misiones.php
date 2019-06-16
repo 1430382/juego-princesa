@@ -113,48 +113,8 @@ $(document).ready( function () {
     </h1>
   </div>
 </section>
-
-
-
-
-<!--
-  <div class="row">
-
-      <div class="banner">
-
-      <div class="col-sm">
-        <img src="img/pt2.png" class="rounded float-left ml-5 mr-5"alt="img">
-        <h2 class="heading"id="texto-minecraft" style="color:black;position: absolute; top: 90px; width: 65%;">Mision.<br>Descripción.<br>Vida.<br>Item.</h2>
-      </div>
-
-    </div>
-
-    <div class="bannerbtn">
-    <div class="col-sm">
-        <img src="img/right.png" class="img-fluid rounded float-left mt-5 ml-3" type="button" width="50" height="50">
-
-    </div>
-    </div>
-
-  </div>
--->
-
-
-
-
-<!--
-<img src="img/pt.png" class="img-fluid rounded float-left ml-5 mr-5"width="270" height="380">-->
-
-
-
-
-
-
 </div>
 
-<!--<nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-#663399" style="background-color: #89746F;>
-    <p class="mt-3 mb-3 text-muted">2019</p>
-  </nav>-->
 
   <!-- JS FILES -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

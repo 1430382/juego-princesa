@@ -1,7 +1,12 @@
 <?php
 include 'backend/conexion.php';
-$usuario = $_SESSION['nombre'];
-echo "<h2>" . $usuario . "</h2>";
+if(!isset($_SESSION)) {
+    //Revisa si la sesión ha sido inciada ya
+    session_start();
+}
+$usuario = $_SESSION['usuario'];
+$rol=$_SESSION['id_rol'];
+//var_dump($usuario);
 ///////
 
 
@@ -73,9 +78,12 @@ if($con ->query($query)== TRUE){
 }
 	$con->close();
 }
+if(isset($_POST['users'])){
+	$users=$_POST['users'];
+}
 /////////////Eliminar
 if(isset($_POST['eliminar'])){
-$query = "DELETE FROM JUGADORES WHERE matricula='".$matricula."' ";
+$query = "DELETE FROM JUGADORES WHERE idjugadores='".$users."' ";
 if($con ->query($query)== TRUE){
 	echo"<div class='alert alert-success alert-dismissable'>
 	<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
@@ -89,6 +97,7 @@ if($con ->query($query)== TRUE){
 	</div>";
 
 }
+//var_dump($users);
 $con->close();
 }
 ///
@@ -120,9 +129,12 @@ $con->close();
 
 }
 ///
+if(isset($_POST['users'])){
+	$users=$_POST['users'];
+}
 /////////////Eliminar
 if(isset($_POST['eliminarI'])){
-$query = "DELETE FROM ITEMS WHERE nombre='".$nombre."' ";
+$query = "DELETE FROM ITEMS WHERE iditems='".$users."' ";
 if($con ->query($query)== TRUE){
 	echo"<div class='alert alert-success alert-dismissable'>
 	<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
@@ -163,12 +175,6 @@ if(isset($_POST['users'])){
 /*======================================================================== */
 //////HECHIZOS
 if(isset($_POST['registrarH'])){
-	var_dump($hechizo);
-	var_dump($descripcion);
-	var_dump($recompensa);
-	var_dump($fecha);
-	var_dump($users);
-
 $query = "INSERT INTO `MISIONES` (nombre,descripcion,recompensa,fecha,idjugadores) VALUES ('".$hechizo."','".$descripcion."','".$recompensa."','".$fecha."','".$users."')";
 if($con ->query($query)== TRUE){
 	echo"<div class='alert alert-success alert-dismissable'>
@@ -188,14 +194,18 @@ $con->close();
 
 }
 ///
+if(isset($_POST['users'])){
+	$users=$_POST['users'];
+}
 /////////////Eliminar
 if(isset($_POST['eliminarH'])){
-$query = "DELETE FROM MISIONES WHERE nombre='".$hechizo."' ";
+$query = "DELETE FROM MISIONES WHERE id='".$users."' ";
 if($con ->query($query)== TRUE){
 	echo"<div class='alert alert-success alert-dismissable'>
 	<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
 	<strong>Exitoso!</strong> El producto se ha eliminado correctamente.
 	</div>";
+
 }else{
 	echo "<div class='alert alert-danger alert-dismissable'>
 	<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
@@ -207,6 +217,96 @@ $con->close();
 ///
 
  ?>
+
+ <script type="text/javascript">
+
+ function validate()
+ {
+     //Se declaran variables
+     var matricula = document.forms["form-margins"]["matricula"];
+     var nombre = document.forms["form-margins"]["nombre"];
+     var apellidos = document.forms["form-margins"]["apellidos"];
+     var vida = document.forms["form-margins"]["vida"];
+     //Luego se verifica con un if cada variable
+     if (matricula.value == "")
+     {
+         window.alert("Introduzca una matricula.");
+         matricula.focus();
+         return false;
+     }
+     if (nombre.value == "")
+     {
+         window.alert("Introduzca un nombre.");
+         nombre.focus();
+         return false;
+     }
+     if (vida.value == "")
+     {
+         window.alert("Introduzca los puntos de vida.");
+         vida.focus();
+         return false;
+     }
+
+     return true;
+ }
+ //
+ function validate1()
+ {
+     //Se declaran variables
+     var nombre = document.forms["itemsvalidate"]["nombre"];
+     var vida = document.forms["itemsvalidate"]["vida"];
+     //Luego se verifica con un if cada variable
+     if (nombre.value == "")
+     {
+         window.alert("Introduzca un nombre.");
+         nombre.focus();
+         return false;
+     }
+     if (vida.value == "")
+     {
+         window.alert("Introduzca los puntos de vida.");
+         vida.focus();
+         return false;
+     }
+
+     return true;
+ }
+ //
+ function validate2()
+ {
+     //Se declaran variables
+     var hechizo = document.forms["hechizosvalidate"]["hechizo"];
+     var descripcion = document.forms["hechizosvalidate"]["descripcion"];
+     var recompensa = document.forms["hechizosvalidate"]["recompensa"];
+     var fecha = document.forms["hechizosvalidate"]["fecha"];
+     //Luego se verifica con un if cada variable
+     if (hechizo.value == "")
+     {
+         window.alert("Introduzca un nombre.");
+         hechizo.focus();
+         return false;
+     }
+     if (descripcion.value == "")
+     {
+         window.alert("Introduzca una descripcion.");
+         descripcion.focus();
+         return false;
+     }
+     if (recompensa.value == "")
+     {
+         window.alert("Introduzca los puntos de recompensa.");
+         recompensa.focus();
+         return false;
+     }
+     if (fecha.value == "")
+     {
+         window.alert("Introduzca una fecha valida.");
+         fecha.focus();
+         return false;
+     }
+     return true;
+ }
+ </script>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -231,8 +331,158 @@ $con->close();
 	<!---
 	  HEADER
 	   -------------->
-	<?php include "header.php" ?>
+	<?php include "header.admin.php" ?>
 
+
+	<body onload="load()">
+
+	<script type="text/javascript">
+	  function Mostrar_Ocultar1(){
+	    var caja = document.getElementById("caja1");
+	    if(caja.style.display == "none"){
+	      document.getElementById("caja1").style.display = "block";
+	      document.getElementById("caja2").style.display = "none";
+	      document.getElementById("caja3").style.display = "none";
+	      document.getElementById("caja4").style.display = "none";
+	      document.getElementById("caja5").style.display = "none";
+	      document.getElementById("caja6").style.display = "none";
+	      document.getElementById("caja7").style.display = "none";
+	      document.getElementById("caja8").style.display = "none";
+	      document.getElementById("caja9").style.display = "none";
+	    }else{
+	      document.getElementById("caja1").style.display = "none";
+
+	    }
+	  }
+	  function Mostrar_Ocultar2(){
+	    var caja = document.getElementById("caja2");
+	    if(caja.style.display == "none"){
+	      document.getElementById("caja2").style.display = "block";
+	      document.getElementById("caja1").style.display = "none";
+	      document.getElementById("caja3").style.display = "none";
+	      document.getElementById("caja4").style.display = "none";
+	      document.getElementById("caja5").style.display = "none";
+	      document.getElementById("caja6").style.display = "none";
+	      document.getElementById("caja7").style.display = "none";
+	      document.getElementById("caja8").style.display = "none";
+	      document.getElementById("caja9").style.display = "none";
+	    }else{
+	      document.getElementById("caja2").style.display = "none";
+	    }
+	  }
+	  function Mostrar_Ocultar3(){
+	    var caja = document.getElementById("caja3");
+	    if(caja.style.display == "none"){
+	      document.getElementById("caja3").style.display = "block";
+	      document.getElementById("caja2").style.display = "none";
+	      document.getElementById("caja1").style.display = "none";
+	      document.getElementById("caja4").style.display = "none";
+	      document.getElementById("caja5").style.display = "none";
+	      document.getElementById("caja6").style.display = "none";
+	      document.getElementById("caja7").style.display = "none";
+	      document.getElementById("caja8").style.display = "none";
+	      document.getElementById("caja9").style.display = "none";
+	    }else{
+	      document.getElementById("caja3").style.display = "none";
+	    }
+	  }
+	  function Mostrar_Ocultar4(){
+	    var caja = document.getElementById("caja4");
+	    if(caja.style.display == "none"){
+	      document.getElementById("caja4").style.display = "block";
+	      document.getElementById("caja2").style.display = "none";
+	      document.getElementById("caja3").style.display = "none";
+	      document.getElementById("caja1").style.display = "none";
+	      document.getElementById("caja5").style.display = "none";
+	      document.getElementById("caja6").style.display = "none";
+	      document.getElementById("caja7").style.display = "none";
+	      document.getElementById("caja8").style.display = "none";
+	      document.getElementById("caja9").style.display = "none";
+	    }else{
+	      document.getElementById("caja4").style.display = "none";
+	    }
+	  }
+	  function Mostrar_Ocultar5(){
+	    var caja = document.getElementById("caja5");
+	    if(caja.style.display == "none"){
+	      document.getElementById("caja5").style.display = "block";
+	      document.getElementById("caja2").style.display = "none";
+	      document.getElementById("caja3").style.display = "none";
+	      document.getElementById("caja4").style.display = "none";
+	      document.getElementById("caja1").style.display = "none";
+	      document.getElementById("caja6").style.display = "none";
+	      document.getElementById("caja7").style.display = "none";
+	      document.getElementById("caja8").style.display = "none";
+	      document.getElementById("caja9").style.display = "none";
+	    }else{
+	      document.getElementById("caja5").style.display = "none";
+	    }
+	  }
+	  function Mostrar_Ocultar6(){
+	    var caja = document.getElementById("caja6");
+	    if(caja.style.display == "none"){
+	      document.getElementById("caja6").style.display = "block";
+	      document.getElementById("caja2").style.display = "none";
+	      document.getElementById("caja3").style.display = "none";
+	      document.getElementById("caja4").style.display = "none";
+	      document.getElementById("caja5").style.display = "none";
+	      document.getElementById("caja1").style.display = "none";
+	      document.getElementById("caja7").style.display = "none";
+	      document.getElementById("caja8").style.display = "none";
+	      document.getElementById("caja9").style.display = "none";
+	    }else{
+	      document.getElementById("caja6").style.display = "none";
+	    }
+	  }
+	  function Mostrar_Ocultar7(){
+	    var caja = document.getElementById("caja7");
+	    if(caja.style.display == "none"){
+	      document.getElementById("caja7").style.display = "block";
+	      document.getElementById("caja2").style.display = "none";
+	      document.getElementById("caja3").style.display = "none";
+	      document.getElementById("caja4").style.display = "none";
+	      document.getElementById("caja5").style.display = "none";
+	      document.getElementById("caja6").style.display = "none";
+	      document.getElementById("caja1").style.display = "none";
+	      document.getElementById("caja8").style.display = "none";
+	      document.getElementById("caja9").style.display = "none";
+	    }else{
+	      document.getElementById("caja7").style.display = "none";
+	    }
+	  }
+    function Mostrar_Ocultar8(){
+	    var caja = document.getElementById("caja8");
+	    if(caja.style.display == "none"){
+	      document.getElementById("caja8").style.display = "block";
+	      document.getElementById("caja2").style.display = "none";
+	      document.getElementById("caja3").style.display = "none";
+	      document.getElementById("caja1").style.display = "none";
+	      document.getElementById("caja5").style.display = "none";
+	      document.getElementById("caja6").style.display = "none";
+	      document.getElementById("caja7").style.display = "none";
+	      document.getElementById("caja4").style.display = "none";
+	      document.getElementById("caja9").style.display = "none";
+	    }else{
+	      document.getElementById("caja8").style.display = "none";
+	    }
+	  }
+	  function Mostrar_Ocultar9(){
+	    var caja = document.getElementById("caja9");
+	    if(caja.style.display == "none"){
+	      document.getElementById("caja9").style.display = "block";
+	      document.getElementById("caja2").style.display = "none";
+	      document.getElementById("caja3").style.display = "none";
+	      document.getElementById("caja4").style.display = "none";
+	      document.getElementById("caja5").style.display = "none";
+	      document.getElementById("caja6").style.display = "none";
+	      document.getElementById("caja7").style.display = "none";
+	      document.getElementById("caja8").style.display = "none";
+	      document.getElementById("caja1").style.display = "none";
+	    }else{
+	      document.getElementById("caja9").style.display = "none";
+	    }
+	  }
+	</script>
 	<style>
 	.button {
 	  background-color: #4CAF50; /* Green */
@@ -254,13 +504,11 @@ $con->close();
 
 			<div class="col-sm">
 				<h1 class="center-text">JUGADORES</h1>
-
-
 				<div class="col-sm" id="marketing" >
-					<section>
+				<section id="caja1" style="display: none;">
 						<div class="mbox-style">
 
-							<form class="center" id="form-margins" method="post">
+							<form class="center" id="form-margins" method="post" onsubmit="return validate()">
 								<div class="form-group">
 									<input type="text" class="form-control" name="matricula" id="matricula" placeholder="Matrícula">
 									<small id="emailHelp" class="form-text text-muted">Procure escribir su matrícula correctamente.</small>
@@ -317,23 +565,135 @@ $con->close();
 									<input class="form-check-input" type="radio" name="fantasma" id="fantasma" value="1">
 									<label class="form-check-label" for="exampleCheck1">Fantasma</label>
 								</div>
-									<button class="button button1" type="submit" name="registrar" >Registrar jugador</button>
-									<button class="button button1" type="submit" name="modificar" >Modificar jugador</button>
-									<button class="button button1" type="submit" name="eliminar" >Eliminar jugador</button>
+									<button class="button button1" type="submit" name="registrar" >Hecho</button>
+
 
 							</form>
+
+
 						</div>
 					</section>
+					<!-- --->
+					<section id="caja2" style="display: none;">
+							<div class="mbox-style">
+
+								<form class="center" id="form-margins" method="post" onsubmit="return validate()">
+									<div class="form-group">
+										<input type="text" class="form-control" name="matricula" id="matricula" placeholder="Matrícula">
+										<small id="emailHelp" class="form-text text-muted">Procure escribir su matrícula correctamente.</small>
+									</div>
+
+									<div class="form-row" style="padding-bottom: 1em;">
+										<div class="col">
+											<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre de pila">
+										</div>
+
+										<div class="col">
+											<input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Apellidos">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="exampleFormControlSelect1">Equipo</label>
+										<select name="equipo" class="form-control" id="equipo">
+											<option>Equipo 1</option>
+											<option>Equipo 2</option>
+											<option>Equipo 3</option>
+											<option>Equipo 4</option>
+											<option>Equipo 5</option>
+											<option>Equipo 6</option>
+											<option>Equipo 7</option>
+										</select>
+									</div>
+
+									<fieldset class="form-group">
+										<div class="row">
+											<legend class="col-form-label col-sm-2 pt-0">Género</legend>
+											<div class="col-sm-10">
+												<div class="form-check" style="margin-left: 1.25em;">
+													<input class="form-check-input" type="radio" name="genero" id="genero" value="hombre" checked>
+													<label class="form-check-label" for="genero">
+														Hombre
+													</label>
+												</div>
+												<div class="form-check" style="margin-left: 1.25em;">
+													<input class="form-check-input" type="radio" name="genero" id="genero" value="mujer">
+													<label class="form-check-label" for="genero">
+														Mujer
+													</label>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Puntos de salud</label>
+										<input type="number" id="vida" name="vida" min="1" max="100" placeholder="PS" style="margin-left: 1em;">
+									</div>
+
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="fantasma" id="fantasma" value="1">
+										<label class="form-check-label" for="exampleCheck1">Fantasma</label>
+									</div>
+										<button class="button button1" type="submit" name="modificar" >Hecho</button>
+
+
+								</form>
+
+
+							</div>
+						</section>
+					<!--
+
+					 --->
+					 <section id="caja3" style="display: none;">
+							 <div class="mbox-style">
+
+								 <form class="center" id="form-margins" method="post">
+									 <div class="form-group">
+										 <select name="users" id="users">
+ 									<?php
+ 							 			$res="select idjugadores,CONCAT(nombre,' ',apellidos,' ') as JUGADORES FROM JUGADORES;";
+ 							 			$res=$con->query($res);
+ 							 			while ($row = $res->fetch_array()) {
+ 							 				?>
+ 							 				<option value="<?php echo $row['idjugadores'];?>">
+ 							 				<?php echo $row['JUGADORES'];?>
+ 							 				</option>
+ 							 				<?php
+ 							 			}
+ 							 		?>
+
+ 					</select>
+									 </div>
+
+
+										 <button class="button button1" type="submit" name="eliminar" >Hecho</button>
+
+
+								 </form>
+
+
+							 </div>
+						 </section>
+					 <!--
+
+						--->
+					<button class="button button1" onclick="Mostrar_Ocultar1()" >Registrar jugador</button>
+					<button class="button button1" onclick="Mostrar_Ocultar1()" >Modificar jugador</button>
+					<button class="button button1" onclick="Mostrar_Ocultar3()" >Eliminar jugador</button>
 				</div>
 			</div>
+
+<!--                ---->
+
 <!--   ITEMS
 ------------------->
 			<div class="col-sm">
 			 	<h1 class="center-text">ITEMS</h1>
 				<div class="col-sm" id="marketing">
-					<section>
+					<section id="caja4" style="display: none;">
 						<div class="mbox-style">
-							<form class="center" id="form-margins" method="post">
+							<form class="center" id="form-margins" name="itemsvalidate" method="post" onsubmit="return validate1()">
 								<div class="form-group">
 									<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre del item">
 								</div>
@@ -367,41 +727,59 @@ $con->close();
 									<label for="exampleInputEmail1">Precio</label>
 									<input type="number" id="vida" name="vida" min="1" max="100" placeholder="Precio del hechizo" style="margin-left: 1em;">
 								</div>
-								<button class="button button1" type="submit" name="registrarI" >Registrar item</button>
-								<button class="button button1" type="submit" name="eliminarI" >Eliminar item</button>
+								<button class="button button1" type="submit" name="registrarI" >Hecho</button>
 							</form>
 						</div>
 					</section>
+					<!-- --->
+					<section id="caja5" style="display: none;">
+						<div class="mbox-style">
+							<form class="center" id="form-margins" method="post">
+								<div class="form-group">
+									<select name="users" id="users">
+							 <?php
+								 $res="select iditems,CONCAT(nombre,' ',categoria,' ') as JUGADORES FROM ITEMS;";
+								 $res=$con->query($res);
+								 while ($row = $res->fetch_array()) {
+									 ?>
+									 <option value="<?php echo $row['iditems'];?>">
+									 <?php echo $row['JUGADORES'];?>
+									 </option>
+									 <?php
+								 }
+							 ?>
+
+			 </select>
+		 					</div>
+								<button class="button button1" type="submit" name="eliminarI" >Hecho</button>
+							</form>
+						</div>
+					</section>
+
+					<button class="button button1" onclick="Mostrar_Ocultar4()" >Registrar item</button>
+					<button class="button button1" onclick="Mostrar_Ocultar5()" >Eliminar item</button>
+
+
 				</div>
 			</div>
 <!--- hechizos---->
 			<div class="col-sm">
 				<h1 class="center-text">HECHIZOS</h1>
 				<div class="col-sm" id="marketing">
-					<section>
+					<section id="caja7" style="display: none;">
 						<div class="mbox-style">
-							<form class="center" id="form-margins" method="post">
+							<form class="center" id="form-margins" name="hechizosvalidate" method="post" onsubmit="return validate2()">
 								<div class="form-group">
 									<input type="text" class="form-control" name="hechizo" id="hechizo" placeholder="Nombre del hechizo">
 								</div>
 								<div class="form-group">
 									<input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción del hechizo">
 								</div>
-								<div class="form-group">
 									<div class="form-group">
 										<input type="text" class="form-control" name="recompensa" id="recompensa" placeholder="Recompensa">
 										<label for="exampleFormControlSelect1">Ingrese la fecha limite</label> <br>
 										<input type="date" name="fecha" id="fecha">
 									</div>
-							<!--		<label for="exampleFormControlSelect1">Categoría</label>
-									<select class="form-control" name="categoria" id="categoria">
-										<option>Misión</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label for="exampleInputEmail1">Valor (en puntos de salud)</label>
-									<input type="number" id="vida" name="vida" min="1" max="100" placeholder="Valor" style="margin-left: 1em;">
-								</div>-->
 								<select name="users" id="users">
 							<?php
 					 			$res="select idjugadores,CONCAT(nombre,' ',apellidos,' ') as JUGADORES FROM JUGADORES;";
@@ -414,18 +792,44 @@ $con->close();
 					 				<?php
 					 			}
 					 		?>
-
 			</select>
-								<button class="button button1" type="submit" name="registrarH" >Registrar hechizo</button>
-								<button class="button button1" type="submit" name="eliminarH" >Eliminar hechizo</button>
+              <button class="button button1" type="submit" name="registrarH" >Hecho</button>
 							</form>
 						</div>
 					</section>
-				</div>
-			</div>
 
+
+					<!--- --->
+
+					<section id="caja8" style="display: none;">
+						<div class="mbox-style">
+							<form class="center" id="form-margins" method="post">
+								<div class="form-group">
+									<select name="users" id="users">
+							 <?php
+								 $res="select id,CONCAT(nombre,' ',descripcion,' ') as JUGADORES FROM MISIONES;";
+								 $res=$con->query($res);
+								 while ($row = $res->fetch_array()) {
+									 ?>
+									 <option value="<?php echo $row['id'];?>">
+									 <?php echo $row['JUGADORES'];?>
+									 </option>
+									 <?php
+								 }
+							 ?>
+
+			 </select>
+		 </div>
+			</select>
+            <button class="button button1" type="submit" name="eliminarH" >Hecho</button>
+							</form>
+						</div>
+					</section>
+					<button class="button button1" onclick="Mostrar_Ocultar7()" >Registrar hechizo</button>
+					<button class="button button1" onclick="Mostrar_Ocultar8()" >Eliminar hechizo</button>
+				</div>
 		</div>
-	</div>
+
 
 	<div class="bottom-right" >
 		<a href="reglas.php">
