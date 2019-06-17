@@ -20,7 +20,7 @@ $usuario = $_SESSION['usuario'];
 //echo "$fechactual";
 ////
 
-$conn=mysqli_connect("localhost","root","","test") or die("Error in connection");
+$conn=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
 $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fantasma,matricula from JUGADORES WHERE idusuarios='$usuario'");
     while ($result=  mysqli_fetch_array($query)) {
 
@@ -65,7 +65,7 @@ function correo($msg)
   //Create a new PHPMailer instance
   $mail = new PHPMailer();
   $mail->IsSMTP();
-  $con=mysqli_connect("localhost","root","","test") or die("Error in connection");
+  $con=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
   $equipo=$_SESSION['$equipo'];
   //var_dump($equipo);
   if (!($res=$con->query("SELECT MATRICULA FROM JUGADORES where equipo!='$equipo'"))) {
@@ -129,10 +129,10 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
             		<strong>Exitoso!</strong> El objeto se a utilizado correctamente.
             	</div>";
               }
-              $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+              $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
               $query = mysqli_query($cox,"DELETE FROM INVENTARIO_ITEMS WHERE idjugadores='$usuario' and iditems='$iditems'");
               //msg
-              $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
+              $cow=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
               $msg = $nombre." ha usado ".$nombreitem." en ".$nombre;
               $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
 
@@ -149,10 +149,10 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
             </div>";
             }
-            $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $query = mysqli_query($cox,"DELETE FROM INVENTARIO_ITEMS WHERE idjugadores='$usuario' and iditems='$iditems'");
             //msg
-            $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cow=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $msg = $nombre." ha usado ".$nombreitem." en ".$equipo;
             $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
   			}
@@ -168,10 +168,10 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
             </div>";
             }
-            $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $query = mysqli_query($cox,"DELETE FROM INVENTARIO_ITEMS WHERE idjugadores='$usuario' and iditems='$iditems'");
             //msg
-            $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cow=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $msg = $nombre." ha usado ".$nombreitem." en ".$nombre;
             $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
   			}
@@ -187,10 +187,10 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
             </div>";
             }
-            $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $query = mysqli_query($cox,"DELETE FROM INVENTARIO_ITEMS WHERE idjugadores='$usuario' and iditems='$iditems'");
             //msg
-            $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cow=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $msg = $nombre." ha usado ".$nombreitem." en ".$nombre;
             $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
   			}
@@ -206,10 +206,10 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
             </div>";
             }
-            $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $query = mysqli_query($cox,"DELETE FROM INVENTARIO_ITEMS WHERE idjugadores='$usuario' and iditems='$iditems'");
             //msg
-            $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cow=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $msg = $nombre." ha usado ".$nombreitem." en ".$equipo;
             $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
   			}
@@ -225,10 +225,10 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
             </div>";
             }
-            $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $query = mysqli_query($cox,"DELETE FROM INVENTARIO_ITEMS WHERE idjugadores='$usuario' and iditems='$iditems'");
             //msg
-            $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cow=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $msg = $nombre." ha usado ".$nombreitem." en ".$equipo;
             $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
   			}
@@ -244,10 +244,10 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
           <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
         </div>";
         }
-        $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+        $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
         $query = mysqli_query($cox,"DELETE FROM INVENTARIO_ITEMS WHERE idjugadores='$usuario' and iditems='$iditems'");
         //msg
-        $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
+        $cow=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
         $msg = $nombre." ha usado ".$nombreitem." en todos menos en ".$equipo;
         $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
         correo($msg);
@@ -264,10 +264,10 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
               <strong>Exitoso!</strong> El objeto se a utilizado correctamente.
             </div>";
             }
-           $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+           $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
            $query = mysqli_query($cox,"DELETE FROM INVENTARIO_ITEMS WHERE idjugadores='$usuario' and iditems='$iditems'");
            //msg
-           $cow=mysqli_connect("localhost","root","","test") or die("Error in connection");
+           $cow=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
            $msg = $nombre." ha usado ".$nombreitem." en todos menos en ".$equipo;
            $query = mysqli_query($cow,"INSERT INTO HISTORIAL(descripcion,fecha) VALUES('$msg','$fechactual')");
            correo($msg);
@@ -770,7 +770,7 @@ echo "</div>
         </div>
       </div>
 </div>
-!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">

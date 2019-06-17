@@ -58,7 +58,7 @@ $usuario = $_SESSION['idjugador'];
 
 </head>
 <?php
-$conn=mysqli_connect("localhost","root","","test") or die("Error in connection");
+$conn=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
 $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fantasma,matricula from JUGADORES WHERE idusuarios='$usuario'");
     while ($result=  mysqli_fetch_array($query)) {
 
@@ -224,7 +224,7 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
        </div> <!--FIN DE LOS EQUIPOS-->
        <!--  -->
        <!--Información del equipo-->
-       <div class="col mb-5" style= "float:left;margin-left:500px;margin-top:-750px;">
+       <div class="col mb-5" style= "float:left;margin-left:500px;margin-top:-700px;">
           <?php
           include_once 'connect.php';
 
@@ -369,11 +369,11 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
        <!--  -->
        <!--  -->
        <!--Información del equipo-->
-       <div class="col mb-5" style= "float:left;margin-left:1000px;margin-top:-750px;">
+       <div class="col mb-5" style= "float:left;margin-left:1000px;margin-top:-700px;">
           <?php
           include_once 'connect.php';
 
-          $sentencia= "SELECT * from JUGADORES where equipo='Equipo 3' LIMIT 1";
+          $sentencia= "SELECT * from JUGADORES where equipo='jojos' LIMIT 1";
           foreach ($base_de_datos->query($sentencia) as $row){
               $equipoid = $row['equipo'];
               //var_dump($equipoid);
@@ -387,7 +387,7 @@ $query = mysqli_query($conn,"SELECT nombre,apellidos,idjugadores,vida,equipo,fan
                   $hp=0; #Para sumar la vida de los jugadores.
                   $conteo=0; #Para contar a los integrantes de cada equipo.
                   $muestra=0; #Para mostrar el boton del su equipo
-                  $sentencia2= "SELECT * FROM JUGADORES WHERE equipo ='Equipo 3'";
+                  $sentencia2= "SELECT * FROM JUGADORES WHERE equipo ='jojos'";
                   foreach ($base_de_datos->query($sentencia2) as $row2){
                       $ps = $row2['vida'];
                       $hp=$hp+$row2['vida'];

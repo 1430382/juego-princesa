@@ -143,7 +143,7 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
 				</div>";
 				}
          $fechahechizo=date('Y-m-d', strtotime($fechactual. ' + 7 days'));
-        $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+        $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
         $query = mysqli_query($cox,"UPDATE ITEMS SET fecha='".$fechahechizo."' WHERE iditems='$iditems'");
 				}
 				else if($row['iditems']==8)
@@ -158,7 +158,7 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
 						}
              $fechahechizo=date('Y-m-d', strtotime($fechactual. ' + 7 days'));
             var_dump($fechahechizo);
-            $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
+            $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
             $query = mysqli_query($cox,"UPDATE ITEMS SET fecha='".$fechahechizo."' WHERE iditems='$iditems'");
 				}
 
