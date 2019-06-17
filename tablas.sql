@@ -23,14 +23,30 @@ CREATE TABLE `USUARIOS` (
 insert into USUARIOS (usuario,contrasena,id_rol)values(1730042,"Rebeca",1);
 insert into USUARIOS (usuario,contrasena,id_rol)values(1730123,"Jose",2);
 
-  CREATE TABLE `ITEMS` (
-    `iditems` int(11) NOT NULL AUTO_INCREMENT,
-    `nombre` varchar(100) NOT NULL,
-    `categoria` varchar(50) NOT NULL,
-    `tipo` varchar(50) NOT NULL,
-    `precio` int(100) NOT NULL,
-    `fecha` date DEFAULT NULL,
-    PRIMARY KEY (`iditems`)
+CREATE TABLE `ITEMS` (
+  `iditems` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `categoria` varchar(50) NOT NULL,
+  `tipo` varchar(50) NOT NULL,
+  `precio` int(100) NOT NULL,
+  `fecha` date DEFAULT NULL,
+  `thumb` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`iditems`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+  CREATE TABLE `JUGADORES` (
+    `idjugadores` int(11) NOT NULL AUTO_INCREMENT,
+    `matricula` varchar(45) NOT NULL,
+    `nombre` varchar(45) NOT NULL,
+    `apellidos` varchar(200) NOT NULL,
+    `equipo` varchar(45) NOT NULL,
+    `genero` varchar(45) NOT NULL,
+    `vida` int(100) NOT NULL,
+    `fantasma` tinyint(1) DEFAULT NULL,
+    `idusuarios` int(11) DEFAULT NULL,
+    PRIMARY KEY (`idjugadores`),
+    UNIQUE KEY `idusuarios` (`idusuarios`),
+    CONSTRAINT `JUGADORES_ibfk_1` FOREIGN KEY (`idusuarios`) REFERENCES `USUARIOS` (`idusuarios`)
   ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `INVENTARIO_ITEMS` (
@@ -42,20 +58,7 @@ CREATE TABLE `INVENTARIO_ITEMS` (
   PRIMARY KEY (idinventario,idjugadores,iditems)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `JUGADORES` (
-  `idjugadores` int(11) NOT NULL AUTO_INCREMENT,
-  `matricula` varchar(45) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `apellidos` varchar(200) NOT NULL,
-  `equipo` varchar(45) NOT NULL,
-  `genero` varchar(45) NOT NULL,
-  `vida` int(100) NOT NULL,
-  `fantasma` tinyint(1) DEFAULT NULL,
-  `idusuarios` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idjugadores`),
-  UNIQUE KEY `idusuarios` (`idusuarios`),
-  CONSTRAINT `JUGADORES_ibfk_1` FOREIGN KEY (`idusuarios`) REFERENCES `USUARIOS` (`idusuarios`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `MISIONES` (
   `id` int(11) auto_increment,
