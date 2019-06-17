@@ -92,11 +92,14 @@ foreign key (idjugadores) references JUGADORES (idjugadores)
  DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE iniciar_sesion(NOMBRE varchar(32), MATRICULA varchar(32))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `iniciar_sesion`(_username varchar(32), _pasword varchar(32))
 BEGIN
-select u.ROL,u.MATRICULA from Usuario u where u.NOMBRE = NOMBRE and u.MATRICULA=MATRICULA;
+
+select u.id_rol,u.idusuarios from USUARIOS u where u.usuario = _username and u.contrasena=_pasword;
+
 END$$
 DELIMITER ;
+
 
 DELIMITER //
 CREATE PROCEDURE MuertePrematura(_MATRICULA int(20))

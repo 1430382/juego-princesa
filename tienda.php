@@ -30,6 +30,20 @@ $fechahechizo=date('Y-m-d', strtotime($fechactual. ' + 7 days'));
 if(isset($_POST['users'])){
 	$users=$_POST['users'];
 }
+//
+$nombre=$_SESSION['nombre'];
+$apellidos=$_SESSION['apellidos'];
+$idjugadores=$_SESSION['$idjugadores'];
+$vida=$_SESSION['$vida'];
+$equipo=$_SESSION['$equipo'];
+$fantasma=$_SESSION['$fantasma'];
+$matricula=$_SESSION['$matricula'];
+$idjugadores=$_SESSION['idjugador'];
+//
+
+
+
+
 ////////
 if(isset($_POST['registrar'])){
 	//echo($objeto);
@@ -129,7 +143,7 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
 				</div>";
 				}
          $fechahechizo=date('Y-m-d', strtotime($fechactual. ' + 7 days'));
-        $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
+        $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
         $query = mysqli_query($cox,"UPDATE ITEMS SET fecha='".$fechahechizo."' WHERE iditems='$iditems'");
 				}
 				else if($row['iditems']==8)
@@ -144,7 +158,7 @@ INNER JOIN ITEMS ON ITEMS.iditems = INVENTARIO_ITEMS.iditems where INVENTARIO_IT
 						}
              $fechahechizo=date('Y-m-d', strtotime($fechactual. ' + 7 days'));
             var_dump($fechahechizo);
-            $cox=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
+            $cox=mysqli_connect("localhost","root","","test") or die("Error in connection");
             $query = mysqli_query($cox,"UPDATE ITEMS SET fecha='".$fechahechizo."' WHERE iditems='$iditems'");
 				}
 
@@ -659,6 +673,7 @@ overflow: scroll;
 </div>
 	</div>
 	<div class="card-footer border-success foot">
+
 	<button type="button" class="boton white" data-toggle='modal'  data-target='#exampleModal'>COMPRAR</button></div>
 	</div> <!--Fin de la lista de OBJETOS-->
 <!--
@@ -678,7 +693,20 @@ overflow: scroll;
       </div>
       <div class="modal-footer">
 				<form class="" method="post">
-						<button type='submit' name="registrar" id="registrar"  class='btn btn-primary'>Buy</button>
+            <?php
+              if ($fantasma=='0') {
+
+                echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"registrar\" >Buy</button>";
+              }else {
+                echo "<div class='modal-body'>
+                    <label for='grupo' id='info'>No puedes comprar
+                    </label>
+
+                  </div>';";
+              }
+
+             ?>
+					<!--	<button type='submit' name="registrar" id="registrar"  class='btn btn-primary'>Buy</button> -->
 				</form>
 	  </div>
 	  </form>

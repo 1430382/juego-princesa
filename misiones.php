@@ -96,7 +96,7 @@ if($_SESSION['rol']==0){
 	</thead>
 	<tbody>
 		<?php
-		 $conn=mysqli_connect("localhost","root","toor","test") or die("Error in connection");
+		 $conn=mysqli_connect("localhost","root","","test") or die("Error in connection");
 		 $query = mysqli_query($conn,"SELECT * FROM MISIONES");
 
   	  		while ($result=  mysqli_fetch_array($query)) {

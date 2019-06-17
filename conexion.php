@@ -1,7 +1,7 @@
 <?php
  $server="localhost";
  $usuario="root";
- $pass="toor";
+ $pass="";
  $baseDatos="test";
  $con = new mysqli($server,$usuario,$pass,$baseDatos);
  $acentos = $con->query("SET NAMES 'utf8'");
